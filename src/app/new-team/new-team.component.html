@@ -1,3 +1,63 @@
-<p>
-  new-team works!
-</p>
+<form materialize [formGroup]="newTeamForm">
+  <div class="row">
+    <div class="col s12 input-field">
+      <input type="text" id="team-name" formControlName="name" required>
+      <label for="team-name">Team Name</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s6 input-field">
+      <input type="text" id="location" formControlName="location" required>
+      <label for="location">Team Location</label>
+    </div>
+    <div class="col s6 input-field">
+      <input type="text" id="coach-name" formControlName="coachName" required>
+      <label for="coach-name">Coach Name</label>
+    </div>
+  </div>
+  <div class="row">
+    <div formArrayName="players">
+      <div *ngFor="let player of players.controls; let i=index" [formGroupName]="i">
+        <div class="row">
+          <a class="btn-floating btn-flat right" (click)="removePlayer(i)"><i class="material-icons right black-text">close</i></a>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input type="text" id="player-name" formControlName="name" required>
+            <label for="player-name">Player #{{i + 1}} Name</label>
+          </div>
+          <div class="input-field col s6">
+            <input type="text" id="player-position" formControlName="position" required>
+            <label for="player-position">Player #{{i + 1}} Position</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s4">
+            <input type="number" id="player-height" formControlName="height" required>
+            <label for="player-height">Player #{{i + 1}} Height</label>
+          </div>
+          <div class="input-field col s4">
+            <input type="number" id="player-weight" formControlName="weight" required>
+            <label for="player-weight">Player #{{i + 1}} Weight</label>
+          </div>
+          <div class="input-field col s2">
+            <input type="text" id="player-birthdate" formControlName="birthdate" required>
+            <label for="player-birthdate">Player #{{i + 1}} Birthdate</label>
+          </div>
+          <div class="input-field col s2">
+            <input type="number" id="player-number" formControlName="jerseyNumber" required>
+            <label for="player-number">Player #{{i + 1}} Jersey Number</label>
+          </div>
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light" (click)="addPlayer()">Add Player
+        <i class="material-icons right">add</i>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <button class="btn waves-effect waves-light" (click)="createTeam()">Create Team
+      <i class="material-icons right">send</i>
+    </button>
+  </div>
+</form>
