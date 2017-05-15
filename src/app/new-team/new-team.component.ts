@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators} from '@angular/forms';
+import { Team } from '../team.model';
+import { Player } from '../player.model';
 
 @Component({
   selector: 'app-new-team',
@@ -41,7 +43,10 @@ export class NewTeamComponent implements OnInit {
   }
 
   createTeam() {
-    console.log(this.newTeamForm);
+    var {name, location, players, coachName} = this.newTeamForm.value;
+    var newTeam = new Team(name, location, coachName);
+    console.log(players);
+    console.log(newTeam);
     console.log(this.newTeamForm.value);
   }
 
