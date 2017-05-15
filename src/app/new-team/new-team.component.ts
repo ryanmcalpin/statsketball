@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators} from '@angular/forms';
+import { Team } from '../team.model';
+import { Player } from '../player.model';
 
 @Component({
   selector: 'app-new-team',
