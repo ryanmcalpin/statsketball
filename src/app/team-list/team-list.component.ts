@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DbService } from '../db.service'
 
 @Component({
   selector: 'app-team-list',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./team-list.component.css']
 })
 export class TeamListComponent implements OnInit {
-
-  constructor() { }
+  players;
+  constructor(public db: DbService) { }
 
   ngOnInit() {
+    this.players = this.db.getPlayers()
   }
 
 }

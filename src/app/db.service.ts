@@ -5,4 +5,8 @@ export class DbService {
 
   constructor() { }
 
+  getPlayers(){
+
+  }
+
 }
