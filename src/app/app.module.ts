@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterializeModule } from 'angular2-materialize';
 
+import { routing } from './app.routing';
+
 import { AppComponent } from './app.component';
 import { NewTeamComponent } from './new-team/new-team.component';
 import { NewPlayerComponent } from './new-player/new-player.component';
@@ -39,6 +41,7 @@ import { SeasonFilterPipe } from './season-filter.pipe';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    routing,
     MaterializeModule
   ],
   providers: [],

@@ -41,6 +41,7 @@ export class NewTeamComponent implements OnInit {
   }
 
   createTeam() {
+    console.log(this.newTeamForm);
     console.log(this.newTeamForm.value);
   }
 
