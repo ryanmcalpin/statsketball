@@ -1,0 +1,40 @@
+PLAYER GAME STATS
+-----------------
+totals(recorded)
+----------------
+minutes, 2sMade, 2sAttempted, 3sMade, 3sAttempted, freeThrowsMade, freeThrowsAttempted, offensiveRebounds, defensiveRebounds, assists, turnovers, steals, blocks, fouls
+
+totals(calculated) & aggregate stats
+------------------------------------
+points((2sMade x 2) + (3sMade X 3) + freeThrowsMade)
+fieldGoalsMade(2sMade + 3sMade)
+fieldGoalsAttempted(2sAttempted + 3sAttempted)
+totalRebounds(offensiveRebounds + defensiveRebounds)
+fieldGoalPercentage(fieldGoalsMade / fieldGoalsAttempted)
+3pointPercentage(3sMade / 3sAttempted)
+freeThrowPercentage(freeThrowsMade / freeThrowsAttempted)
+
+
+PLAYER SEASON STATS
+-------------------
+totals(recorded)
+----------------
+gamesPlayed, minutes, 2sMade, 2sAttempted, 3sMade, 3sAttempted, freeThrowsMade, freeThrowsAttempted, offensiveRebounds, defensiveRebounds, assists, turnovers, steals, blocks, fouls
+
+totals(calculated) & aggregate stats
+------------------------------------
+points((2sMade x 2) + (3sMade X 3) + freeThrowsMade)
+fieldGoalsMade(2sMade + 3sMade)
+fieldGoalsAttempted(2sAttempted + 3sAttempted)
+totalRebounds(offensiveRebounds + defensiveRebounds)
+pointsPerGame(points / gamesPlayed)
+fieldGoalPercentage(fieldGoalsMade / fieldGoalsAttempted)
+3pointPercentage(3sMade / 3sAttempted)
+freeThrowPercentage(freeThrowsMade / freeThrowsAttempted)
+reboundsPerGame(totalRebounds / gamesPlayed)
+assistsPerGame(assists / gamesPlayed)
+minutesPerGame(minutes / gamesPlayed)
+turnoversPerGame(turnovers / gamesPlayed)
+stealsPerGame(steals / gamesPlayed)
+blocksPerGame(blocks / gamesPlayed)
+foulsPerGame(fouls / gamesPlayed)
