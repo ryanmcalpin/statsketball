@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import 'rxjs/add/operator/takeUntil';
 import { Subject } from 'rxjs/Subject';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-team-view',
@@ -9,8 +11,8 @@ import { Subject } from 'rxjs/Subject';
 })
 export class TeamViewComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
-
-  constructor() { }
+  // currentTeam;
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }

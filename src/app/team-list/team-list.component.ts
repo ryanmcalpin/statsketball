@@ -11,6 +11,7 @@ import { Team } from '../team.model';
 })
 export class TeamListComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+  adminLoggedIn: boolean = true; // TODO change this
 
   teams: any[];
   players: any[];
