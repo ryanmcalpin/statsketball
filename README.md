@@ -44,7 +44,12 @@
     - [ ] update-stats
 
 ## Routes
-
+- [ ] '/teams/new' (adding and removing players happens here)
+- [ ] '/teams/:teamId'
+- [ ] '/teams/:teamId/edit' (adding and editing players happens here, too)
+- [ ] '/teams/:teamId/players/:playerId'
+- [ ] '/teams/:teamId/games/new'
+- [ ] '/teams/:teamId/games/:gameId'
 
 ## Pipes
 - [ ] calculateStats
@@ -125,6 +130,13 @@
 10-15 players w/ ~82 games per season
 
 ## Checklist
+
+### Monday
+- [ ] Form for creating a team -jb
+- [ ] Service for, to start, addTeam
+- [ ] constructor for team model -rm
+- [ ] Main page set up (welcome/about page, navbar with routes) -mf
+
 - [ ] Update and edit functions have to be mindful of several "tables"
 - [ ] As soon as a player plays >0 minutes in a game, add that player id to game object and add game id to the player object.
 - [ ] As we add game, retrieve all previous games, re-calculate averages, and update averages table
