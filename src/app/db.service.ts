@@ -38,6 +38,10 @@ export class DbService {
     return this.teams;
   }
 
+  getTeamById(teamId: string) {
+    return this.db.object('/teams/'+teamId);
+  }
+
   getPlayerById(playerId: string){
     return this.db.object('players/' + playerId);
   }
