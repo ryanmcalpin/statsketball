@@ -27,7 +27,7 @@ export class DbService {
         position: player.position,
         height: player.height,
         weight: player.weight,
-        birthdate: player.birthdate,
+        birthdate: (new Date(player.birthdate).toJSON()),
         teamId: teamId
       };
       firebase.database().ref().update(updates);

@@ -3,7 +3,16 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">{{team?.name}}</span>
-        
+        <p>Location: {{team?.location}}</p>
+        <p>Coach: {{team?.coachName}}</p>
+        <ul class="collection">
+          <li class="collection-item" *ngFor="let player of players">
+            <span>{{player.name}}</span>
+            <span>{{player.position}}</span>
+            <span>{{player.height}}</span>
+            <span>{{player.weight}}</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
