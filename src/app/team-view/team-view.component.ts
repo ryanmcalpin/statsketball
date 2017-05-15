@@ -1,6 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import 'rxjs/add/operator/takeUntil';
 import { Subject } from 'rxjs/Subject';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { Team } from '../team.model';
+import { Player } from '../player.model';
+import { DbService } from '../db.service';
 
 @Component({
   selector: 'app-team-view',
@@ -10,9 +15,19 @@ import { Subject } from 'rxjs/Subject';
 export class TeamViewComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
-  constructor() { }
+  teamId: string;
+  team: Team;
+  players: Player[];
+
+  constructor(private route: ActivatedRoute,
+              private db: DbService) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.teamId = params['teamId'];
+      this.db.getPlayersOnTeam(this.teamId)
+        .takeUntil(this.ngUnsubscribe).subscribe(players => this.players = players);
+    })
   }
 
   ngOnDestroy() {
