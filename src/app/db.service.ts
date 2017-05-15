@@ -44,7 +44,7 @@ export class DbService {
 
   getPlayersOnTeam(teamId: string){
     return this.db.list('teams/' + teamId + '/players').switchMap(players=>{
-      return players.length===0 ? Observable.of([]) : Observable.combineLatest(...players.map(player =>{this.getPlayerById(player.$key)}))
+      return players.length===0 ? Observable.of([]) : Observable.combineLatest(...players.map(player => this.getPlayerById(player.$key)))
     });
   }
 
