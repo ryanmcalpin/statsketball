@@ -3,8 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterializeModule } from 'angular2-materialize';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { routing } from './app.routing';
+import { masterFirebaseConfig } from './api-keys';
 
 import { AppComponent } from './app.component';
 import { NewTeamComponent } from './new-team/new-team.component';
@@ -19,6 +22,14 @@ import { GameViewComponent } from './game-view/game-view.component';
 import { UpdateStatsComponent } from './update-stats/update-stats.component';
 import { CalculateStatsPipe } from './calculate-stats.pipe';
 import { SeasonFilterPipe } from './season-filter.pipe';
+import { TeamListComponent } from './team-list/team-list.component';
+
+export const firebaseConfig = {
+  apiKey: masterFirebaseConfig.apiKey,
+  authDomain: masterFirebaseConfig.authDomain,
+  databaseURL: masterFirebaseConfig.databaseURL,
+  storageBucket: masterFirebaseConfig.storageBucket
+};
 
 @NgModule({
   declarations: [
@@ -34,7 +45,8 @@ import { SeasonFilterPipe } from './season-filter.pipe';
     GameViewComponent,
     UpdateStatsComponent,
     CalculateStatsPipe,
-    SeasonFilterPipe
+    SeasonFilterPipe,
+    TeamListComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +54,9 @@ import { SeasonFilterPipe } from './season-filter.pipe';
     ReactiveFormsModule,
     HttpModule,
     routing,
-    MaterializeModule
+    MaterializeModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

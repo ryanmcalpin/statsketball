@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DbService } from './db.service'
 
 @Component({
   selector: 'app-root',
