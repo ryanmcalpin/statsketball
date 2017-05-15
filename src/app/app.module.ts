@@ -3,8 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterializeModule } from 'angular2-materialize';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { routing } from './app.routing';
+import { masterFirebaseConfig } from './api-keys';
 
 import { AppComponent } from './app.component';
 import { NewTeamComponent } from './new-team/new-team.component';
@@ -20,6 +23,15 @@ import { UpdateStatsComponent } from './update-stats/update-stats.component';
 import { CalculateStatsPipe } from './calculate-stats.pipe';
 import { SeasonFilterPipe } from './season-filter.pipe';
 import { TeamListComponent } from './team-list/team-list.component';
+
+import { DbService } from './db.service';
+
+export const firebaseConfig = {
+  apiKey: masterFirebaseConfig.apiKey,
+  authDomain: masterFirebaseConfig.authDomain,
+  databaseURL: masterFirebaseConfig.databaseURL,
+  storageBucket: masterFirebaseConfig.storageBucket
+};
 
 @NgModule({
   declarations: [
@@ -44,9 +56,11 @@ import { TeamListComponent } from './team-list/team-list.component';
     ReactiveFormsModule,
     HttpModule,
     routing,
-    MaterializeModule
+    MaterializeModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [DbService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
