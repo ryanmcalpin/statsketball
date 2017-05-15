@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators} from '@angular/forms';
 import { Team } from '../team.model';
 import { Player } from '../player.model';
+import { DbService } from '../db.service';
 
 @Component({
   selector: 'app-new-team',
@@ -12,7 +13,8 @@ export class NewTeamComponent implements OnInit {
 
   newTeamForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private db: DbService) { }
 
   ngOnInit() {
     this.newTeamForm = this.fb.group({
@@ -43,8 +45,10 @@ export class NewTeamComponent implements OnInit {
   }
 
   createTeam() {
-    console.log(this.newTeamForm);
-    console.log(this.newTeamForm.value);
+    var {name, location, players, coachName} = this.newTeamForm.value;
+    var newTeam = new Team(name, location, coachName);
+    this.db.createTeam(newTeam, players);
+    this.newTeamForm.reset();
   }
 
 }
