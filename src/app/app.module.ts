@@ -17,6 +17,7 @@ import { GameViewComponent } from './game-view/game-view.component';
 import { UpdateStatsComponent } from './update-stats/update-stats.component';
 import { CalculateStatsPipe } from './calculate-stats.pipe';
 import { SeasonFilterPipe } from './season-filter.pipe';
+import { TeamListComponent } from './team-list/team-list.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SeasonFilterPipe } from './season-filter.pipe';
     GameViewComponent,
     UpdateStatsComponent,
     CalculateStatsPipe,
-    SeasonFilterPipe
+    SeasonFilterPipe,
+    TeamListComponent
   ],
   imports: [
     BrowserModule,

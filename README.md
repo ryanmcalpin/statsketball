@@ -42,8 +42,10 @@
   - [ ] player-view
   - [ ] game-view
     - [ ] update-stats
+- [ ] team-list
 
 ## Routes
+- [ ] '/teams'
 - [ ] '/teams/new' (adding and removing players happens here)
 - [ ] '/teams/:teamId'
 - [ ] '/teams/:teamId/edit' (adding and editing players happens here, too)
