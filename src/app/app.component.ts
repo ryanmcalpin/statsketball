@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit, OnDestroy} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
+  currentPage;
+
+  constructor(){}
+
+  ngOnInit() {
+    this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
+      this.currentPage = event['url'].split('/').filter(route => (route));
+      console.log(this.currentPage);
+    })
+  }
 }
