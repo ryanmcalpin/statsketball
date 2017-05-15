@@ -54,7 +54,9 @@ export const firebaseConfig = {
     ReactiveFormsModule,
     HttpModule,
     routing,
-    MaterializeModule
+    MaterializeModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
