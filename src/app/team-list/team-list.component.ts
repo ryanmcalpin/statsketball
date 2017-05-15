@@ -11,7 +11,10 @@ export class TeamListComponent implements OnInit {
   constructor(public db: DbService) { }
 
   ngOnInit() {
-    this.players = this.db.getPlayers()
+    // TODO add argumment
+    this.db.getPlayersOnTeam().subscribe(results=>{
+      this.players = results;
+    });
   }
 
 }
