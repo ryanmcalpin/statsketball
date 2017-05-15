@@ -24,6 +24,8 @@ import { CalculateStatsPipe } from './calculate-stats.pipe';
 import { SeasonFilterPipe } from './season-filter.pipe';
 import { TeamListComponent } from './team-list/team-list.component';
 
+import { DbService } from './db.service';
+
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
   authDomain: masterFirebaseConfig.authDomain,
@@ -58,7 +60,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [DbService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
