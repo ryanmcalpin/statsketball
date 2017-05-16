@@ -2,14 +2,13 @@
   <header>
     <nav>
       <div class="nav-wrapper">
-        <a href="#" data-activates="slide-out" class="button-collapse show-on-large" materialize="sideNav" [materializeParams]="[{closeOnClick: true}]"><i class="material-icons">menu</i></a>
+        <a *ngIf="user" href="#" data-activates="slide-out" class="button-collapse show-on-large" materialize="sideNav" [materializeParams]="[{closeOnClick: true}]"><i class="material-icons">menu</i></a>
         <div class="col s12">
           <a routerLink="" class="breadcrumb">Home</a>
           <a routerLink="{{routeSection}}" class="breadcrumb" *ngFor="let placeholder of routeSections; let i = index">{{routeSections| breadcrumb:i|async|titlecase}}</a>
           <ul class="right hide-on-med-and-down">
-            <li><a routerLink='#'>Log In</a></li>
-            <li><a routerLink='#'>Log Out</a></li>
-            <li><img class="brand-logo right" src="http://pngimg.com/uploads/basketball/basketball_PNG1096.png" alt="" id="basketball-icon"></li> <!-- TODO fix -->
+            <li *ngIf="!user"><a (click)="loginGoogleComponent()">Log In</a></li>
+            <li><img src="http://pngimg.com/uploads/basketball/basketball_PNG1096.png" alt="" id="basketball-icon"></li>
           </ul>
         </div>
         <ul id="slide-out" class="side-nav">
@@ -23,9 +22,12 @@
           </div></li>
           <li><a routerLink='#'>About</a></li>
           <li><div class="divider"></div></li>
+          <li><a (click)="logoutComponent()">Log Out</a></li>
         </ul>
       </div>
     </nav>
   </header>
 </div>
-<router-outlet></router-outlet>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
