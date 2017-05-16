@@ -48,4 +48,12 @@ export class AppComponent implements OnInit, OnDestroy {
   logoutComponent(){
     this.authService.logout();
   }
+
+  navigateToSubURL(urlComponents: string[], index:number){
+    let subURL: string;
+    for(let i=0; i<=index; i++){
+      subURL += urlComponents[i];
+    }
+    console.log(subURL);
+  }
 }
