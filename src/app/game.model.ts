@@ -1,3 +1,3 @@
 export class Game {
-  constructor(public opponent: string, public season: string, public gameLocation: string, public gameDate: string) { }
+  constructor(public opponent: string, public season: string, public location: string, public date: string) { }
 }

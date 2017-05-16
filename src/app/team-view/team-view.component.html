@@ -2,6 +2,7 @@
   <div class="col s12 m10 offset-m1">
     <div class="card">
       <div class="card-content">
+        <a class="waves-effect waves-light btn modal-trigger right" (click)="openModal()">New Game</a>
         <span class="card-title">{{team?.name}}</span>
         <p>Location: {{team?.location}}</p>
         <p>Coach: {{team?.coachName}}</p>
@@ -15,5 +16,15 @@
         </ul>
       </div>
     </div>
+  </div>
+</div>
+
+<div id="newGameModal" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="newGameModal">
+  <div class="modal-content">
+    <h4>Create new Game</h4>
+    <app-new-game [teamId]="teamId" (closeModalSender)="closeModal()"></app-new-game>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
   </div>
 </div>

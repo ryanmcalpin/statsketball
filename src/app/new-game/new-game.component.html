@@ -1,3 +1,27 @@
-<p>
-  new-game works!
-</p>
+<form materialize [formGroup]="newGameForm">
+  <div class="row">
+    <div class="col s6 input-field">
+      <input type="text" id="opponent" formControlName="opponent" required>
+      <label for="opponent">Opposing Team</label>
+    </div>
+    <div class="col s6 input-field">
+      <input type="text" id="location" formControlName="location" required>
+      <label for="location">Game Location</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s6 input-field">
+      <input type="date" id="date" class="datepicker" materialize="pickadate" [materializeParams]="[{selectYears: 20}]" formControlName="date" required>
+      <label for="date">Game Date</label>
+    </div>
+    <div class="col s6 input-field">
+      <input type="text" id="season" formControlName="season" required>
+      <label for="season">Game Season</label>
+    </div>
+  </div>
+  <div class="row">
+    <button type="button" [disabled]="!newGameForm.valid" class="btn waves-effect waves-light" (click)="createGame()">Create Game
+      <i class="material-icons right">send</i>
+    </button>
+  </div>
+</form>
