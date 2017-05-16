@@ -121,7 +121,7 @@ export class DbService {
 
   calculateAge(birthdate: string){
     let parsedDate = this.parseBirthdayString(birthdate);
-    return this.calculateAgeFromMonthDayYear(parsedDate.month, parsedDate.day, parsedDate.year);
+    return this.getAgeFromMonthDayYear(parsedDate.month, parsedDate.day, parsedDate.year);
   }
 
   parseBirthdayString(date: string){
@@ -130,7 +130,7 @@ export class DbService {
     year:date.replace(/(^\d+)-.*/,"$1")};
   }
 
-  calculateAgeFromMonthDayYear(birthMonth, birthDay, birthYear){
+  getAgeFromMonthDayYear(birthMonth, birthDay, birthYear){
   let todayDate = new Date();
   let todayYear = todayDate.getFullYear();
   let todayMonth = todayDate.getMonth();
