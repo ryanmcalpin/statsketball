@@ -2,30 +2,34 @@
   <header>
     <nav>
       <div class="nav-wrapper">
-        <a href="#" data-activates="slide-out" class="button-collapse show-on-large" materialize="sideNav" [materializeParams]="[{closeOnClick: true}]"><i class="material-icons">menu</i></a>
+        <a *ngIf="user" href="#" data-activates="slide-out" class="button-collapse show-on-large" materialize="sideNav" [materializeParams]="[{closeOnClick: true}]"><i class="material-icons">menu</i></a>
         <div class="col s12">
           <a routerLink="" class="breadcrumb">Home</a>
           <a routerLink="{{routeSection}}" class="breadcrumb" *ngFor="let placeholder of routeSections; let i = index">{{routeSections| breadcrumb:i|async|titlecase}}</a>
           <ul class="right hide-on-med-and-down">
-            <li><a routerLink='#'>Log In</a></li>
-            <li><a routerLink='#'>Log Out</a></li>
-            <li><img class="brand-logo right" src="http://pngimg.com/uploads/basketball/basketball_PNG1096.png" alt="" id="basketball-icon"></li> <!-- TODO fix -->
+            <li *ngIf="!user"><a (click)="loginGoogleComponent()">Log In</a></li>
+            <li><img src="http://pngimg.com/uploads/basketball/basketball_PNG1096.png" alt="" id="basketball-icon"></li>
           </ul>
         </div>
         <ul id="slide-out" class="side-nav">
           <li><div class="userView">
             <div class="background">
-              <img src="images/office.jpg">
+              <img src="https://media.licdn.com/mpr/mpr/p/1/005/0a3/3c9/203d1eb.jpg">
             </div>
-            <a href="#!user"><img class="circle" src="images/yuna.jpg"></a>
-            <a href="#!name"><span class="white-text name">John Doe</span></a>
-            <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+            <a><img class="circle" src="{{userObjFromDb.photoURL}}"></a>
+            <a><span class="white-text name">{{userObjFromDb.name}}</span></a>
+            <a><span class="white-text email">{{userObjFromDb.email}}</span></a>
           </div></li>
-          <li><a routerLink='#'>About</a></li>
           <li><div class="divider"></div></li>
+          <li><a (click)="logoutComponent()">Log Out</a></li>
         </ul>
       </div>
     </nav>
   </header>
 </div>
-<router-outlet></router-outlet>
+<div class="container">
+  <router-outlet></router-outlet>
+  <div *ngIf="!user" id="user-with-no-teams-section">
+
+  </div>
+</div>

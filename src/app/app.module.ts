@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { MaterializeModule } from 'angular2-materialize';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { routing } from './app.routing';
 import { masterFirebaseConfig } from './api-keys';
@@ -25,6 +26,7 @@ import { SeasonFilterPipe } from './season-filter.pipe';
 import { TeamListComponent } from './team-list/team-list.component';
 
 import { DbService } from './db.service';
+import { AuthenticateService } from './authenticate.service';
 import { BreadcrumbPipe } from './breadcrumb.pipe';
 
 export const firebaseConfig = {
@@ -60,9 +62,13 @@ export const firebaseConfig = {
     routing,
     MaterializeModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
-  providers: [DbService],
+  providers: [
+    DbService,
+    AuthenticateService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
