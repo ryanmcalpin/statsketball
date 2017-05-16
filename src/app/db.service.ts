@@ -88,4 +88,12 @@ export class DbService {
     });
   }
 
+  getGamesPlayedByTeam(teamId: string){
+    return this.db.list('teams/' + teamId + '/games').switchMap(games=>{
+      return games.length===0 ? Observable.of([]) :
+      Observable.combineLatest(...games.map(game=>
+      this.getGameById(game.$key)))
+    });
+  }
+
 }

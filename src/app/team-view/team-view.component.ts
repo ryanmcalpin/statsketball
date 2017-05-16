@@ -5,6 +5,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Team } from '../team.model';
 import { Player } from '../player.model';
+import { Game } from '../game.model';
 import { DbService } from '../db.service';
 import { MaterializeAction } from 'angular2-materialize';
 
@@ -18,6 +19,7 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   teamId: string;
   team: Team;
   players: Player[];
+  games: Game[];
 
   newGameModal = new EventEmitter<string|MaterializeAction>();
 
@@ -31,6 +33,8 @@ export class TeamViewComponent implements OnInit, OnDestroy {
         .takeUntil(this.ngUnsubscribe).subscribe(team => this.team = team);
       this.db.getPlayersOnTeam(this.teamId)
         .takeUntil(this.ngUnsubscribe).subscribe(players => this.players = players);
+      this.db.getGamesPlayedByTeam(this.teamId)
+      .takeUntil(this.ngUnsubscribe).subscribe(games => this.games = games);
     })
   }
 
