@@ -1,25 +1,31 @@
-<nav>
-  <div class="nav-wrapper">
-    <a href="#" data-activates="slide-out" class="button-collapse show-on-large" materialize="sideNav" [materializeParams]="[{closeOnClick: true}]"><i class="material-icons">menu</i></a>
-    <a href="#" class="brand-logo right"><img src="http://pngimg.com/uploads/basketball/basketball_PNG1096.png" alt="" id="basketball-icon"></a>
-    <ul id="nav-mobile" class="left hide-on-med-and-down">
-      <li><a routerLink="" class="breadcrumb">Home</a></li>
-      <li *ngFor="let routeSection of routeSections; let i = index"><a routerLink="{{routeSection}}" class="breadcrumb">{{routeSection | breadcrumb:i|async|titlecase}}</a></li>
-      <li><a routerLink='#'>Log In</a></li>
-      <li><a routerLink='#'>Log Out</a></li>
-    </ul>
-    <ul id="slide-out" class="side-nav">
-      <li><div class="userView">
-          <div class="background">
-            <img src="images/office.jpg">
-          </div>
-          <a href="#!user"><img class="circle" src="images/yuna.jpg"></a>
-          <a href="#!name"><span class="white-text name">John Doe</span></a>
-          <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
-        </div></li>
-      <li><a routerLink='#'>About</a></li>
-      <li><div class="divider"></div></li>
-    </ul>
-  </div>
-</nav>
+<div class="page-layout">
+  <header>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" data-activates="slide-out" class="button-collapse show-on-large" materialize="sideNav" [materializeParams]="[{closeOnClick: true}]"><i class="material-icons">menu</i></a>
+        <div class="col s12">
+          <a routerLink="" class="breadcrumb">Home</a>
+          <a routerLink="{{routeSection}}" class="breadcrumb" *ngFor="let placeholder of routeSections; let i = index">{{routeSections| breadcrumb:i|async|titlecase}}</a>
+          <ul class="right hide-on-med-and-down">
+            <li><a routerLink='#'>Log In</a></li>
+            <li><a routerLink='#'>Log Out</a></li>
+            <li><img class="brand-logo right" src="http://pngimg.com/uploads/basketball/basketball_PNG1096.png" alt="" id="basketball-icon"></li> <!-- TODO fix -->
+          </ul>
+        </div>
+        <ul id="slide-out" class="side-nav">
+          <li><div class="userView">
+            <div class="background">
+              <img src="images/office.jpg">
+            </div>
+            <a href="#!user"><img class="circle" src="images/yuna.jpg"></a>
+            <a href="#!name"><span class="white-text name">John Doe</span></a>
+            <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+          </div></li>
+          <li><a routerLink='#'>About</a></li>
+          <li><div class="divider"></div></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+</div>
 <router-outlet></router-outlet>

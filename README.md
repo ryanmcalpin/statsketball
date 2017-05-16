@@ -62,20 +62,21 @@
 - [ ] auth (login, logout, etc.)
 
 ## Models
-- [ ] teams
- - [ ] teamId (key)
-   - [ ] name
-   - [ ] playerIDs: string[] ... firebase {key, true}
-   - [ ] location
-   - [ ] coachNames: string[]
+- [x] teams
+ - [x] teamId (key)
+   - [x] name
+   - [x] playerIDs: string[] ... firebase {key, true}
+   - [x] location
+   - [x] coachName
 
-- [ ] players
-  - [ ] id (matching key in team)
-    - [ ] fullName
-    - [ ] position
-    - [ ] height
-    - [ ] weight
-    - [ ] birthdate (age calculated)
+- [x] players
+  - [x] id
+    - [x] teamId
+    - [x] name
+    - [x] position
+    - [x] height
+    - [x] weight
+    - [ ] birthdate (age calculated; currently timestamp)
     - [ ] gamesPlayed ... firebase {key, true--> null when we want to remove}
 
 - [ ] games
@@ -134,10 +135,10 @@
 ## Checklist
 
 ### Monday
-- [ ] Form for creating a team -jb
+- [x] Form for creating a team -jb
 - [ ] Service for, to start, addTeam
-- [ ] constructor for team model -rm
-- [ ] Main page set up (welcome/about page, navbar with routes) -mf
+- [x] constructor for team model -rm
+- [ ] Main page set up (welcome/about page, navbar with breadcrumbs) -mf
 
 - [ ] Update and edit functions have to be mindful of several "tables"
 - [ ] As soon as a player plays >0 minutes in a game, add that player id to game object and add game id to the player object.

@@ -10,19 +10,23 @@ export class BreadcrumbPipe implements PipeTransform {
   constructor(private dbService: DbService) {}
 
   transform(crumb: string[], index: number): any {
+    // console.log(crumb);
+    // console.log(index);
+    console.log(crumb[index]);
     return new Promise((resolve, reject) => {
-      if (crumb[index] === 'new') {
+      if (['new','edit'].includes(crumb[index])) {
         resolve(crumb[index]);
-      } else if (index === 1 && crumb[0] === 'members') {
-        return this.dbService.getMemberOnce(crumb[index]).then(value => {
-          if (value.val().displayName) {
-            resolve(value.val().displayName);
-          } else {
-            resolve(value.val().email);
-          }
+      } else if (index === 1 && crumb[0] === 'teams') {
+        return this.dbService.getTeamByIdOnce(crumb[index]).then(value => {
+          console.log(value);
+          resolve(value.val().name);
         })
-      } else if (index === 1 && crumb[0] === 'events') {
-        return this.dbService.getEventOnce(crumb[index]).then(value => {
+      } else if (index === 3 && crumb[2] === 'games') {
+        return this.dbService.getGameByIdOnce(crumb[index]).then(value => {
+          resolve(value.val().opponent);
+        })
+      } else if(index === 3 && crumb[2] === 'players'){
+        return this.dbService.getPlayerByIdOnce(crumb[index]).then(value =>{
           resolve(value.val().name);
         })
       } else {
