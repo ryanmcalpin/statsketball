@@ -11,6 +11,13 @@ import { Player } from './player.model';
 @Injectable()
 export class DbService {
   teams: FirebaseListObservable<any>;
+  positions: any[] = [
+    {short: 'PG', long: 'Point Guard'},
+    {short: 'SG', long: 'Shooting Guard'},
+    {short: 'SF', long: 'Small Forward'},
+    {short: 'PF', long: 'Power Forward'},
+    {short: 'C', long: 'Center'}
+  ];
 
   constructor(private db: AngularFireDatabase) {
     this.teams = db.list('/teams');
@@ -32,6 +39,10 @@ export class DbService {
       };
       firebase.database().ref().update(updates);
     })
+  }
+
+  getPositions() {
+    return this.positions;
   }
 
   getTeams(){
