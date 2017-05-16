@@ -26,7 +26,6 @@
       <li *ngFor="let player of players; trackBy:trackByFn">
         <div class="collapsible-header">{{(player.info | async)?.name}}</div>
         <div class="collapsible-body">
-          
           <input materialize type="number" [ngModel]="(player.stats | async)?.twoMade" (ngModelChange)="player.stats.update({twoMade: $event})">
         </div>
       </li>
