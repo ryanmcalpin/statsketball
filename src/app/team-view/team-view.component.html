@@ -17,6 +17,58 @@
             </a>
           </li>
         </ul>
+
+        <form materialize [formGroup]="newPlayerForm">
+          <div class="row">
+            <div formArrayName="playersF">
+              <div *ngFor="let player of playersF.controls; let i=index" [formGroupName]="i">
+                <div class="row">
+                  <a class="btn-floating btn-flat right" (click)="removePlayer(i)"><i class="material-icons right black-text">close</i></a>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input type="text" id="player-name" formControlName="name" required>
+                    <label for="player-name">Player #{{i + 1}} Name</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <select id="player-position" materialize="material_select" [materializeSelectOptions]="positions" formControlName="position" required>
+                      <option value="" disabled selected>Choose a position</option>
+                      <option *ngFor="let option of positions" [value]="option.short">{{option.long}}</option>
+                    </select>
+                    <label for="player-position">Player #{{i + 1}} Position</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s3">
+                    <input type="number" id="player-height" formControlName="height" required>
+                    <label for="player-height">Player #{{i + 1}} Height</label>
+                  </div>
+                  <div class="input-field col s3">
+                    <input type="number" id="player-weight" formControlName="weight" required>
+                    <label for="player-weight">Player #{{i + 1}} Weight</label>
+                  </div>
+                  <div class="input-field col s3">
+                    <input type="date" id="player-birthdate" class="datepicker" materialize="pickadate" [materializeParams]="[{selectYears: 20}]" formControlName="birthdate" required>
+                    <label for="player-birthdate">Player #{{i + 1}} Birthdate</label>
+                  </div>
+                  <div class="input-field col s3">
+                    <input type="number" id="player-number" formControlName="jerseyNumber" required>
+                    <label for="player-number">Player #{{i + 1}} Jersey Number</label>
+                  </div>
+                </div>
+              </div>
+              <button class="btn waves-effect waves-light" (click)="addPlayer()">Add Player
+                <i class="material-icons right">add</i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div *ngIf="playersF.length>=1" class="row">
+          <button type="button" [disabled]="!newPlayerForm.valid" class="btn waves-effect waves-light" (click)="savePlayers()">Save New Players
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+
         <p>Games:</p>
         <ul class="collection">
           <li class="collection-item" *ngFor="let game of games">

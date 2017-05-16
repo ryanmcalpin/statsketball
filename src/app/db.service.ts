@@ -170,4 +170,7 @@ export class DbService {
   return age;
   }
 
+  addPlayersToTeam(players: any, teamId: string) {
+    console.log(players, teamId);
+  }
 }

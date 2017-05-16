@@ -8,6 +8,7 @@ import { Player } from '../player.model';
 import { Game } from '../game.model';
 import { DbService } from '../db.service';
 import { MaterializeAction } from 'angular2-materialize';
+import { FormBuilder, FormGroup, FormControl, FormArray, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-team-view',
@@ -20,11 +21,14 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   team: Team;
   players;
   games;
+  newPlayerForm: FormGroup;
+  positions: any[];
 
   newGameModal = new EventEmitter<string|MaterializeAction>();
 
   constructor(private route: ActivatedRoute,
-              private db: DbService) { }
+              private db: DbService,
+              private fb: FormBuilder) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -36,6 +40,30 @@ export class TeamViewComponent implements OnInit, OnDestroy {
       this.db.getGamesPlayedByTeam(this.teamId)
       .takeUntil(this.ngUnsubscribe).subscribe(games => this.games = games);
     });
+    this.newPlayerForm = this.fb.group({
+      playersF: this.fb.array([]),
+    });
+    this.positions = this.db.getPositions();
+  }
+
+  get playersF(): FormArray {
+    return this.newPlayerForm.get('playersF') as FormArray;
+  }
+
+  addPlayer() {
+    this.playersF.push(this.fb.group({
+      name: [''],
+      position: [''],
+      height: [''],
+      weight: [''],
+      birthdate: [''],
+      jerseyNumber: ['']
+    }))
+  }
+
+  savePlayers(){
+    var {playersF} = this.newPlayerForm.value;
+    this.db.addPlayersToTeam(playersF, this.teamId);
   }
 
   ngOnDestroy() {
