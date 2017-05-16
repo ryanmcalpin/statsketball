@@ -8,7 +8,10 @@ import { Player } from '../player.model';
 import { Game } from '../game.model';
 import { DbService } from '../db.service';
 import { MaterializeAction } from 'angular2-materialize';
+
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators} from '@angular/forms';
+
+import { AuthenticateService } from '../authenticate.service';
 
 @Component({
   selector: 'app-team-view',
@@ -23,12 +26,14 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   games;
   newPlayerForm: FormGroup;
   positions: any[];
+  user: any = null;
 
   newGameModal = new EventEmitter<string|MaterializeAction>();
 
   constructor(private route: ActivatedRoute,
               private db: DbService,
               private fb: FormBuilder) { }
+              private db: DbService, private authService: AuthenticateService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -64,6 +69,8 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   savePlayers(){
     var {playersF} = this.newPlayerForm.value;
     this.db.addPlayersToTeam(playersF, this.teamId);
+    this.authService.getCurrentUser()
+      .takeUntil(this.ngUnsubscribe).subscribe(user=> this.user = user);
   }
 
   ngOnDestroy() {

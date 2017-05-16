@@ -170,7 +170,14 @@ export class DbService {
   return age;
   }
 
+
   addPlayersToTeam(players: any, teamId: string) {
     console.log(players, teamId);
   }
+
+  getUserById(userId: string){
+    let retrievedUser = this.db.object('users/' + userId);
+    return retrievedUser;
+  }
+
 }

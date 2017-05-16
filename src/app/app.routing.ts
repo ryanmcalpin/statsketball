@@ -30,6 +30,10 @@ const appRoutes: Routes = [
   {
     path: 'teams/:teamId/players/:playerId',
     component: PlayerViewComponent
+  },
+  {
+    path: 'teams/new',
+    component: NewTeamComponent
   }
 
 ];
