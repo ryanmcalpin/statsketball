@@ -14,16 +14,13 @@ import { Subject } from 'rxjs/Subject';
 })
 export class AppComponent implements OnInit {
   title = 'app works!';
-  currentPage;
+  routeSections;
 
   constructor(private router: Router){}
 
   ngOnInit() {
     this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
-      console.log(event['url']);
-      this.currentPage = event['url'].split('/').filter(route => (route));
-      console.log("Current page is: ")
-      console.log(this.currentPage);
+      this.routeSections = event['url'].split('/').filter(route => (route));
     })
   }
 }

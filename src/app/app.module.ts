@@ -25,6 +25,7 @@ import { SeasonFilterPipe } from './season-filter.pipe';
 import { TeamListComponent } from './team-list/team-list.component';
 
 import { DbService } from './db.service';
+import { BreadcrumbPipe } from './breadcrumb.pipe';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -48,7 +49,8 @@ export const firebaseConfig = {
     UpdateStatsComponent,
     CalculateStatsPipe,
     SeasonFilterPipe,
-    TeamListComponent
+    TeamListComponent,
+    BreadcrumbPipe
   ],
   imports: [
     BrowserModule,

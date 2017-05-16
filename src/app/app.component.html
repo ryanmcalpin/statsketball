@@ -4,7 +4,7 @@
     <a href="#" class="brand-logo right"><img src="http://pngimg.com/uploads/basketball/basketball_PNG1096.png" alt="" id="basketball-icon"></a>
     <ul id="nav-mobile" class="left hide-on-med-and-down">
       <li><a routerLink="" class="breadcrumb">Home</a></li>
-      <li><a routerLink='/teams'>Create Team</a></li>
+      <li *ngFor="let routeSection of routeSections; let i = index"><a routerLink="{{routeSection}}" class="breadcrumb">{{routeSection | breadcrumb:i|async|titlecase}}</a></li>
       <li><a routerLink='#'>Log In</a></li>
       <li><a routerLink='#'>Log Out</a></li>
     </ul>
