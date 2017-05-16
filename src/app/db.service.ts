@@ -45,6 +45,7 @@ export class DbService {
       };
       firebase.database().ref().update(updates);
     })
+    return teamId;
   }
 
   createGame(team: any, game: any) {
@@ -133,7 +134,7 @@ export class DbService {
   }
 
   convertInchesToFeetAndInches(inches: number){
-    let whole =Math.round(inches/12.0).toString()+"\'";
+    let whole =Math.floor(inches/12.0).toString()+"\'";
     let remainingInches: string  = '';
     if(inches %12){
       remainingInches = (inches %12).toString()+"\"";

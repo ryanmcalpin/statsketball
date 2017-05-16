@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, FormArray, Validators} from '@angu
 import { Team } from '../team.model';
 import { Player } from '../player.model';
 import { DbService } from '../db.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-team',
@@ -15,7 +16,8 @@ export class NewTeamComponent implements OnInit {
   positions: any[];
 
   constructor(private fb: FormBuilder,
-              private db: DbService) { }
+              private db: DbService,
+              private router: Router) { }
 
   ngOnInit() {
     this.newTeamForm = this.fb.group({
@@ -50,8 +52,9 @@ export class NewTeamComponent implements OnInit {
   createTeam() {
     var {name, location, players, coachName} = this.newTeamForm.value;
     var newTeam = new Team(name, location, coachName);
-    this.db.createTeam(newTeam, players);
+    var teamId = this.db.createTeam(newTeam, players);
     this.newTeamForm.reset();
+    this.router.navigate(['teams', teamId]);
   }
 
 }
