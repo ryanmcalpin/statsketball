@@ -28,6 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authService.getCurrentUser()
       .takeUntil(this.ngUnsubscribe).subscribe(user=>{
       this.user = user;
+      console.log(this.user);
     });
   }
 

@@ -14,13 +14,12 @@
         <ul id="slide-out" class="side-nav">
           <li><div class="userView">
             <div class="background">
-              <img src="images/office.jpg">
+              <img src="https://media.licdn.com/mpr/mpr/p/1/005/0a3/3c9/203d1eb.jpg">
             </div>
-            <a href="#!user"><img class="circle" src="images/yuna.jpg"></a>
-            <a href="#!name"><span class="white-text name">John Doe</span></a>
-            <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+            <a><img class="circle" src="{{user.photoURL}}"></a>
+            <a><span class="white-text name">{{user.displayName}}</span></a>
+            <a><span class="white-text email">{{user.email}}</span></a>
           </div></li>
-          <li><a routerLink='#'>About</a></li>
           <li><div class="divider"></div></li>
           <li><a (click)="logoutComponent()">Log Out</a></li>
         </ul>
