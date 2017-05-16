@@ -62,6 +62,22 @@ export class DbService {
     return this.db.object('/teams/'+teamId);
   }
 
+  getGameById(gameId: string) {
+    return this.db.object('/games/'+gameId);
+  }
+
+  getGameByIdOnce(gameId: string) {
+    return firebase.database().ref('/games/'+ gameId).once('value');
+  }
+
+  getPlayerByIdOnce(playerId: string) {
+    return firebase.database().ref('/players/'+ playerId).once('value');
+  }
+
+  getTeamByIdOnce(teamId: string) {
+    return firebase.database().ref('/teams/'+teamId).once('value');
+  }
+
   getPlayerById(playerId: string){
     return this.db.object('players/' + playerId);
   }
