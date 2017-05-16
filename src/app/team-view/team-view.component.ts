@@ -36,6 +36,7 @@ export class TeamViewComponent implements OnInit, OnDestroy {
       this.db.getGamesPlayedByTeam(this.teamId)
       .takeUntil(this.ngUnsubscribe).subscribe(games => this.games = games);
     })
+    console.log(this.games);
   }
 
   ngOnDestroy() {
