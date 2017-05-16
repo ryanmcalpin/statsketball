@@ -147,4 +147,9 @@ export class DbService {
   return age;
   }
 
+  getUserById(userId: string){
+    let retrievedUser = this.db.object('users/' + userId);
+    return retrievedUser;
+  }
+
 }

@@ -1,6 +1,6 @@
 export class User {
   photoURL: string;
-  constructor(name: string, email:string, photoURL: string, dateCreated:any){
+  constructor(public name: string, public email:string, photoURL: string, public dateCreated:any){
     if (photoURL){
       this.photoURL = photoURL
     } else {

@@ -13,8 +13,8 @@ export class AuthenticateService {
     this.user.subscribe(user=>{
       if(user){
         var ref = firebase.database().ref('/users');
-        ref.once('value', (userObservableObj)=>{
-          if(!userObservableObj.hasChild(user.uid)){
+        ref.once('value', (snapshot)=>{
+          if(!snapshot.hasChild(user.uid)){
             let newUser = new User(user.displayName, user.email, user.photoURL, (new Date).toJSON());
             ref.child(user.uid).set(newUser);
           }

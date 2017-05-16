@@ -17,9 +17,10 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'app works!';
   routeSections;
   user: any = null;
+  userObjFromDb;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(private router: Router, private authService: AuthenticateService){}
+  constructor(private router: Router, private authService: AuthenticateService, private db:DbService ){}
 
   ngOnInit() {
     this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
@@ -28,7 +29,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authService.getCurrentUser()
       .takeUntil(this.ngUnsubscribe).subscribe(user=>{
       this.user = user;
-      console.log(this.user);
+      this.db.getUserById(this.user.uid)
+        .takeUntil(this.ngUnsubscribe).subscribe(dbuser=>{
+          this.userObjFromDb = dbuser;
+          console.log(this.userObjFromDb);
+      });
     });
   }
 
