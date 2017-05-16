@@ -27,7 +27,10 @@
             <label for="player-name">Player #{{i + 1}} Name</label>
           </div>
           <div class="input-field col s6">
-            <input type="text" id="player-position" formControlName="position" required>
+            <select id="player-position" materialize="material_select" [materializeSelectOptions]="positions" formControlName="position" required>
+              <option value="" disabled selected>Choose a position</option>
+              <option *ngFor="let option of positions" [value]="option.short">{{option.long}}</option>
+            </select>
             <label for="player-position">Player #{{i + 1}} Position</label>
           </div>
         </div>
@@ -41,7 +44,7 @@
             <label for="player-weight">Player #{{i + 1}} Weight</label>
           </div>
           <div class="input-field col s2">
-            <input type="date" id="player-birthdate" class="datepicker" materialize="pickadate" formControlName="birthdate" required>
+            <input type="date" id="player-birthdate" class="datepicker" materialize="pickadate" [materializeParams]="[{selectYears: 20}]" formControlName="birthdate" required>
             <label for="player-birthdate">Player #{{i + 1}} Birthdate</label>
           </div>
           <div class="input-field col s2">
@@ -56,7 +59,7 @@
     </div>
   </div>
   <div class="row">
-    <button class="btn waves-effect waves-light" (click)="createTeam()">Create Team
+    <button [disabled]="!newTeamForm.valid" class="btn waves-effect waves-light" (click)="createTeam()">Create Team
       <i class="material-icons right">send</i>
     </button>
   </div>

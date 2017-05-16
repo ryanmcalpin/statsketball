@@ -12,6 +12,7 @@ import { DbService } from '../db.service';
 export class NewTeamComponent implements OnInit {
 
   newTeamForm: FormGroup;
+  positions: any[];
 
   constructor(private fb: FormBuilder,
               private db: DbService) { }
@@ -22,7 +23,9 @@ export class NewTeamComponent implements OnInit {
       location: ['', Validators.required],
       players: this.fb.array([]),
       coachName: ['', Validators.required]
-    })
+    });
+    this.positions = this.db.getPositions();
+    console.log(this.positions)
   }
 
   get players(): FormArray {
