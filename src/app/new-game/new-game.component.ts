@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./new-game.component.css']
 })
 export class NewGameComponent implements OnInit {
-  @Input() teamId: string;
+  @Input() team: any;
   @Output() closeModalSender = new EventEmitter();
 
   newGameForm: FormGroup;
@@ -34,10 +34,10 @@ export class NewGameComponent implements OnInit {
       season: season,
       location: location,
       date: date,
-      teamId: this.teamId
+      teamId: this.team.$key
     }
-    var gameId = this.db.createGame(newGame);
+    var gameId = this.db.createGame(this.team, newGame);
     this.closeModalSender.emit();
-    this.router.navigate(['teams', this.teamId, 'games', gameId, 'stats']);
+    this.router.navigate(['teams', this.team.$key, 'games', gameId, 'stats']);
   }
 }

@@ -18,8 +18,10 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
 
   teamId: string;
   gameId: string;
-  team: Team;
-  game: Game;
+  team: any;
+  game: any;
+  players: any[];
+
 
   constructor(private route: ActivatedRoute,
               private db: DbService) { }
@@ -29,9 +31,18 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
       this.teamId = params['teamId'];
       this.gameId = params['gameId'];
       this.db.getTeamById(this.teamId)
-        .takeUntil(this.ngUnsubscribe).subscribe(team => this.team = team);
+        .takeUntil(this.ngUnsubscribe).subscribe(team => {
+          this.team = team;
+          this.players = Object.keys(this.team.players).map(key => {
+            var player = {};
+            player['info'] = this.db.getPlayerById(key);
+            player['stats'] = this.db.getPlayerGameStats(this.gameId, key);
+            return player;
+          });
+        });
       this.db.getGameById(this.gameId)
         .takeUntil(this.ngUnsubscribe).subscribe(game => this.game = game);
+
     })
   }
 
@@ -39,5 +50,10 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
+
+  trackByFn(index: any, item: any) {
+    return item.$key;
+  }
+
 
 }
