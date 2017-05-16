@@ -18,8 +18,8 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   teamId: string;
   team: Team;
-  players: Player[];
-  games: Game[];
+  players;
+  games;
 
   newGameModal = new EventEmitter<string|MaterializeAction>();
 
@@ -35,8 +35,7 @@ export class TeamViewComponent implements OnInit, OnDestroy {
         .takeUntil(this.ngUnsubscribe).subscribe(players => this.players = players);
       this.db.getGamesPlayedByTeam(this.teamId)
       .takeUntil(this.ngUnsubscribe).subscribe(games => this.games = games);
-    })
-    console.log(this.games);
+    });
   }
 
   ngOnDestroy() {

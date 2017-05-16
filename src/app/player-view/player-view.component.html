@@ -1,3 +1,27 @@
-<p>
-  player-view works!
-</p>
+<div class="row">
+  <div class="col s12 m10 offset-m1">
+    <div class="card">
+      <div class="card-image">
+        <img src="https://yarncommunity.org/images/empty.png" alt="person-placeholder" />
+        <span class="card-title black">{{currentPlayer.name}}</span>
+      </div>
+      <div class="card-content">
+        <p>Age: {{db.calculateAge(currentPlayer.birthdate)}}</p>
+        <p>Height: {{db.convertInchesToFeetAndInches(currentPlayer.height).ft}} {{db.convertInchesToFeetAndInches(currentPlayer.height).in}}</p>
+        <p>Position: {{db.getLongPosition(currentPlayer.position)}}</p>
+        <p>Weight: {{currentPlayer.weight}} lbs.</p>
+        <p>Games played:</p>
+        <ul class="collection">
+          <li class="collection-item" *ngFor="let game of gamesThisPlayerPlayed">
+            <a routerLink='teams/{{currentPlayer.teamId}}/games/{{game.$key}}'>
+              <span>{{game.season}} | </span>
+              <span>{{game.date}} | </span>
+              <span>{{game.location}} | </span>
+              <span>{{game.opponent}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

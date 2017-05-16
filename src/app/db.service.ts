@@ -23,6 +23,12 @@ export class DbService {
     this.teams = db.list('/teams');
   }
 
+  getLongPosition(shortPosition: string){
+  let result=this.positions.filter(position=>{
+  return position.short===shortPosition});
+  return result[0].long;
+  }
+
   createTeam(team: Team, players: Player[]) {
     var teamId = this.teams.push(team).key;
     players.forEach(player => {
@@ -96,6 +102,14 @@ export class DbService {
     });
   }
 
+  getGamesPlayedByPlayer(playerId: string){
+    return this.db.list('players/' + playerId + '/gamesPlayed').switchMap(games=>{
+      return games.length===0 ? Observable.of([]) :
+      Observable.combineLatest(...games.map(game=>
+      this.getGameById(game.$key)))
+    });
+  }
+
   convertInchesToFeetAndInches(inches: number){
     let whole =Math.round(inches/12.0).toString()+"\'";
     let remainingInches: string  = '';
@@ -103,6 +117,34 @@ export class DbService {
       remainingInches = (inches %12).toString()+"\"";
     }
     return {ft:whole, in:remainingInches}
+  }
+
+  calculateAge(birthdate: string){
+    let parsedDate = this.parseBirthdayString(birthdate);
+    return this.calculateAgeFromMonthDayYear(parsedDate.month, parsedDate.day, parsedDate.year);
+  }
+
+  parseBirthdayString(date: string){
+    return {month:date.replace(/^\d+-(\d+)-.*/,"$1"),
+    day:date.replace(/^\d+-\d+-(\d+)T.*/,"$1"),
+    year:date.replace(/(^\d+)-.*/,"$1")};
+  }
+
+  calculateAgeFromMonthDayYear(birthMonth, birthDay, birthYear){
+  let todayDate = new Date();
+  let todayYear = todayDate.getFullYear();
+  let todayMonth = todayDate.getMonth();
+  let todayDay = todayDate.getDate();
+  let age = todayYear - birthYear;
+    if (todayMonth < birthMonth - 1)
+    {
+      age--;
+    }
+    if (birthMonth - 1 == todayMonth && todayDay < birthDay)
+    {
+      age--;
+    }
+  return age;
   }
 
 }
