@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import 'rxjs/add/operator/takeUntil';
 import { Subject } from 'rxjs/Subject';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { Team } from '../team.model';
 import { Player } from '../player.model';
 import { DbService } from '../db.service';
+import { MaterializeAction } from 'angular2-materialize';
 
 @Component({
   selector: 'app-team-view',
@@ -18,9 +19,11 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   team: Team;
   players: Player[];
 
+  newGameModal = new EventEmitter<string|MaterializeAction>();
+
   constructor(private route: ActivatedRoute,
               private db: DbService) { }
-              
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.teamId = params['teamId'];
@@ -34,6 +37,13 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  openModal() {
+    this.newGameModal.emit({action:"modal",params:['open']});
+  }
+  closeModal() {
+    this.newGameModal.emit({action:"modal",params:['close']});
   }
 
 }

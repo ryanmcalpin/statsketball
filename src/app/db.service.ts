@@ -41,6 +41,15 @@ export class DbService {
     })
   }
 
+  createGame(game: any) {
+    var gameId = firebase.database().ref('/games').push().key;
+    var updates = {};
+    updates['/games/'+gameId] = game;
+    updates['/teams/'+game.teamId+'/games/'+gameId] = true;
+    firebase.database().ref().update(updates);
+    return gameId;
+  }
+
   getPositions() {
     return this.positions;
   }
