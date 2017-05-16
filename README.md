@@ -56,9 +56,10 @@
 ## Pipes
 - [ ] calculateStats
 - [ ] seasonFilter
+- [x] breadcrumbs
 
 ## Services
-- [ ] db (addStat, addGame, addPlayer, etc.)
+- [+] db (addStat, addGame, addPlayer, etc.)
 - [ ] auth (login, logout, etc.)
 
 ## Models
