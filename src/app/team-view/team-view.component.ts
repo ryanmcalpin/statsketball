@@ -8,6 +8,7 @@ import { Player } from '../player.model';
 import { Game } from '../game.model';
 import { DbService } from '../db.service';
 import { MaterializeAction } from 'angular2-materialize';
+import { AuthenticateService } from '../authenticate.service';
 
 @Component({
   selector: 'app-team-view',
@@ -20,11 +21,12 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   team: Team;
   players;
   games;
+  user: any = null;
 
   newGameModal = new EventEmitter<string|MaterializeAction>();
 
   constructor(private route: ActivatedRoute,
-              private db: DbService) { }
+              private db: DbService, private authService: AuthenticateService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -36,6 +38,8 @@ export class TeamViewComponent implements OnInit, OnDestroy {
       this.db.getGamesPlayedByTeam(this.teamId)
       .takeUntil(this.ngUnsubscribe).subscribe(games => this.games = games);
     });
+    this.authService.getCurrentUser()
+      .takeUntil(this.ngUnsubscribe).subscribe(user=> this.user = user);
   }
 
   ngOnDestroy() {

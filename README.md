@@ -60,7 +60,7 @@
 
 ## Services
 - [+] db (addStat, addGame, addPlayer, etc.)
-- [ ] auth (login, logout, etc.)
+- [ ] authenticate (login, logout, etc.)
 
 ## Models
 - [x] teams
