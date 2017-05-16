@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col s12 m10 offset-m1">
-    <div class="card">
+    <div class="card" *ngIf="currentPlayer">
       <div class="card-image">
         <img src="https://yarncommunity.org/images/empty.png" alt="person-placeholder" />
         <span class="card-title black">{{currentPlayer.name}}</span>

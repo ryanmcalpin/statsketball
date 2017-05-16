@@ -32,7 +32,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.db.getUserById(this.user.uid)
         .takeUntil(this.ngUnsubscribe).subscribe(dbuser=>{
           this.userObjFromDb = dbuser;
-          console.log(this.userObjFromDb);
       });
     });
   }
