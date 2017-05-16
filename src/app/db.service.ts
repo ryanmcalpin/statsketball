@@ -47,11 +47,29 @@ export class DbService {
     })
   }
 
-  createGame(game: any) {
+  createGame(team: any, game: any) {
     var gameId = firebase.database().ref('/games').push().key;
     var updates = {};
     updates['/games/'+gameId] = game;
     updates['/teams/'+game.teamId+'/games/'+gameId] = true;
+    Object.keys(team.players).forEach(player => {
+      updates['/singleGamePlayerStats/'+gameId+'/'+player] = {
+        minutes: 0,
+        twoMade: 0,
+        twoAttempt: 0,
+        threeMade: 0,
+        threeAttempt: 0,
+        freeMade: 0,
+        freeAttempt: 0,
+        offRebounds: 0,
+        defRebounds: 0,
+        assists: 0,
+        turnovers: 0,
+        steals: 0,
+        blocks: 0,
+        fouls: 0
+      }
+    })
     firebase.database().ref().update(updates);
     return gameId;
   }
@@ -85,7 +103,11 @@ export class DbService {
   }
 
   getPlayerById(playerId: string){
-    return this.db.object('players/' + playerId);
+    return this.db.object('/players/' + playerId);
+  }
+
+  getPlayerGameStats(gameId: string, playerId: string) {
+    return this.db.object('/singleGamePlayerStats/'+gameId+'/'+playerId);
   }
 
   getPlayersOnTeam(teamId: string){
