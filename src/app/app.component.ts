@@ -27,13 +27,14 @@ export class AppComponent implements OnInit, OnDestroy {
       this.routeSections = event['url'].split('/').filter(route => (route));
     });
     this.authService.getCurrentUser()
-      .takeUntil(this.ngUnsubscribe).subscribe(user=>{
+    .takeUntil(this.ngUnsubscribe).subscribe(user=>{
       this.user = user;
       if (this.user) {
         this.db.getUserById(this.user.uid)
         .takeUntil(this.ngUnsubscribe).subscribe(dbuser=>{
           this.userObjFromDb = dbuser;
-      });
+        });
+      }
     });
   }
 
