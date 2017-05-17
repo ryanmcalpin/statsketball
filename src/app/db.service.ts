@@ -215,7 +215,6 @@ export class DbService {
   }
 
   updateTeam(teamId: string, team: any) {
-    console.log(teamId, team);
     this.teams.update(teamId, team);
   }
 }
