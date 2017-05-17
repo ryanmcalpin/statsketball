@@ -1,40 +1,47 @@
-.stats-group {
+.stats-section {
   display: flex;
-  flex-direction: column;
-  width: 150px;
-  align-items: space-between;
-  justify-content: center;
+  flex-direction: column;;
+  justify-content: space-between;
+  height: 350px;
 }
 
-.stats-group .badge {
-  margin: 5px 0px;
+.stats-section hr {
+  width: 100%;
 }
 
-.stats-btn-group {
+.stats-summary {
   display: flex;
-  width: 150px;
-  align-items: center;
-  align-content: center;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.point-section {
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 
-.stats-btn-group .chip {
-  width: 45px;
-  position: relative;
-}
-
-.stats-btn-group .chip h5 {
-  position: absolute;
-  margin: auto;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-
-.stats-section {
+.rebound-section {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   flex-wrap: wrap;
-  justify-content: space-around;
+}
+.other-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.player-stats-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.player-stats-header span.badge {
+  width: 80px;
+}
+.player-stats-header span.badge strong {
+  font-size: 20px;
 }
