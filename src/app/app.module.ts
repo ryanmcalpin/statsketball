@@ -28,6 +28,7 @@ import { TeamListComponent } from './team-list/team-list.component';
 import { DbService } from './db.service';
 import { AuthenticateService } from './authenticate.service';
 import { BreadcrumbPipe } from './breadcrumb.pipe';
+import { StatsGroupComponent } from './stats-group/stats-group.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -52,7 +53,8 @@ export const firebaseConfig = {
     CalculateStatsPipe,
     SeasonFilterPipe,
     TeamListComponent,
-    BreadcrumbPipe
+    BreadcrumbPipe,
+    StatsGroupComponent
   ],
   imports: [
     BrowserModule,

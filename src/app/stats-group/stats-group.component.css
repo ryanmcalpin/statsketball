@@ -1,0 +1,32 @@
+.stats-group {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  align-items: space-between;
+  justify-content: center;
+}
+
+.stats-group .badge {
+  margin: 5px 0px;
+}
+
+.stats-btn-group {
+  display: flex;
+  width: 150px;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.stats-btn-group .chip {
+  width: 45px;
+  position: relative;
+}
+
+.stats-btn-group .chip h5 {
+  position: absolute;
+  margin: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
