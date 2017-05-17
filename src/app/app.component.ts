@@ -27,15 +27,13 @@ export class AppComponent implements OnInit, OnDestroy {
       this.routeSections = event['url'].split('/').filter(route => (route));
     });
     this.authService.getCurrentUser()
-      .takeUntil(this.ngUnsubscribe).subscribe(user=>{
+    .takeUntil(this.ngUnsubscribe).subscribe(user=>{
       this.user = user;
       if (this.user) {
         this.db.getUserById(this.user.uid)
         .takeUntil(this.ngUnsubscribe).subscribe(dbuser=>{
           this.userObjFromDb = dbuser;
-          console.log(this.userObjFromDb);
         });
-
       }
     });
   }
@@ -51,5 +49,19 @@ export class AppComponent implements OnInit, OnDestroy {
 
   logoutComponent(){
     this.authService.logout();
+  }
+
+  navigateToSubURL(urlComponents: string[], index:number){
+    let subURLComponents = null;
+    let subURL = null;
+    if(['players', 'games'].includes(urlComponents[index])){
+      subURLComponents = urlComponents.slice(0,index);
+    } else{
+      subURLComponents = urlComponents.slice(0,index+1);
+    }
+    subURL = subURLComponents.reduce((acc,subComponent)=>{
+      return acc + "/" + subComponent;
+    });
+    this.router.navigate([subURL]);
   }
 }

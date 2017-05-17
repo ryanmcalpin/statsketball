@@ -1,0 +1,14 @@
+<div class="stats-group">
+  <span class="new badge" data-badge-caption="">{{statTitle}}</span>
+  <div class="stats-btn-group">
+
+    <button class="btn-floating btn-flat waves-effect waves-light" *ngIf="statVal.value > 0" (click)="decrement(player, statName, statVal.value)"><i class="material-icons black-text">remove</i></button>
+
+    <button class="btn-floating btn-flat waves-effect waves-light disabled" *ngIf="statVal.value == 0"><i class="material-icons black-text">remove</i></button>
+
+    <div class="chip"><h5>{{stat}}</h5></div>
+    <input class="hide" #statVal [ngModel]="stat">
+
+    <button class="btn-floating btn-flat waves-effect waves-light" (click)="increment(player, statName, statVal.value)"><i class="material-icons black-text">add</i></button>
+  </div>
+</div>
