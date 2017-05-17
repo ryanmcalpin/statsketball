@@ -3,19 +3,97 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">{{team?.name}} vs {{game?.opponent}}</span>
-        <p>Location: {{game?.location}}</p>
-        <p>Date: {{game?.date}}</p>
-        <p>Season: {{game?.season}}</p>
+        <p>Location: <span class="right">{{game?.location}}</span></p>
+        <p>Date: <span class="right">{{game?.date}}</span></p>
+        <p>Season: <span class="right">{{game?.season}}</span></p>
       </div>
     </div>
   </div>
   <div class="col s12 m9">
     <div class="card">
       <div class="card-content">
+        <h5 class="center-align">Game Summary</h5>
+        <div class="game-summary">
+          <!-- Points -->
+          <div class="game-point-summary">
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Points" data-badge-caption=" - PTS">
+              <strong>{{((gameSummary | async)?.twoMade * 2) + ((gameSummary | async)?.threeMade * 3) + ((gameSummary | async)?.freeMade)}}</strong>
+            </span>
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Turnovers" data-badge-caption=" - TOV">
+              <strong>{{(gameSummary | async)?.turnovers}}</strong>
+            </span>
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Personal Fouls" data-badge-caption=" - PF">
+              <strong>{{(gameSummary | async)?.fouls}}</strong>
+            </span>
+          </div>
+          <!-- 2P made/ attempt/ % -->
+          <div class="game-point-summary">
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Field Goal Percentage" data-badge-caption=" - FG%">
+              <strong>{{(((gameSummary | async)?.twoMade + (gameSummary | async)?.threeMade)/((gameSummary | async)?.twoAttempt + (gameSummary | async)?.threeAttempt) || '0' | number:'1.2-2')}}</strong>
+            </span>
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Field Goals" data-badge-caption=" - FG">
+              <strong>{{((gameSummary | async)?.twoMade + (gameSummary | async)?.threeMade)}}</strong>
+            </span>
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Field Goals Attempted" data-badge-caption=" - FGA">
+              <strong>{{((gameSummary | async)?.twoAttempt + (gameSummary | async)?.threeAttempt)}}</strong>
+            </span>
+          </div>
+          <!-- 3P made/ attempt/ % -->
+          <div class="game-point-summary">
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="3-Point Percentage" data-badge-caption=" - 3P%">
+              <strong>{{(((gameSummary | async)?.threeMade)/((gameSummary | async)?.threeAttempt) || '0' | number:'1.2-2')}}</strong>
+            </span>
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="3-Pointers" data-badge-caption=" - 3P">
+              <strong>{{(gameSummary | async)?.threeMade}}</strong>
+            </span>
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="3-Pointers Attempted" data-badge-caption=" - 3PA">
+              <strong>{{(gameSummary | async)?.threeAttempt}}</strong>
+            </span>
+          </div>
+          <!-- FT made/ attempt/ % -->
+          <div class="game-point-summary">
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Free Throw Percentage" data-badge-caption=" - FT%">
+              <strong>{{(((gameSummary | async)?.freeMade)/((gameSummary | async)?.freeAttempt) || '0' | number:'1.2-2')}}</strong>
+            </span>
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Free Throw" data-badge-caption=" - FT">
+              <strong>{{(gameSummary | async)?.freeMade}}</strong>
+            </span>
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Free Throws Attempted" data-badge-caption=" - FTA">
+              <strong>{{(gameSummary | async)?.freeAttempt}}</strong>
+            </span>
+          </div>
+          <!-- TRB -->
+          <div class="game-point-summary">
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Total Rebounds" data-badge-caption=" - TRB">
+              <strong>{{((gameSummary | async)?.offRebounds) + ((gameSummary | async)?.defRebounds)}}</strong>
+            </span>
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Offensive Rebounds" data-badge-caption=" - ORB">
+              <strong>{{(gameSummary | async)?.offRebounds}}</strong>
+            </span>
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Defensive Rebounds" data-badge-caption=" - DRB">
+              <strong>{{(gameSummary | async)?.defRebounds}}</strong>
+            </span>
+          </div>
+          <!-- AST -->
+          <div class="game-point-summary">
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Assists" data-badge-caption=" - AST">
+              <strong>{{(gameSummary | async)?.assists}}</strong>
+            </span>
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Steals" data-badge-caption=" - STL">
+              <strong>{{(gameSummary | async)?.steals}}</strong>
+            </span>
+            <span materialize="tooltip" class="new badge tooltipped" data-position="left" data-delay="50" data-tooltip="Blocks" data-badge-caption=" - BLK">
+              <strong>{{(gameSummary | async)?.blocks}}</strong>
+            </span>
+          </div>
+          <!-- STL -->
+          <!-- BLK -->
+
+        </div>
         <p>
-          {{(gameSummary | async)?.twoMade}}
+          <!-- {{(gameSummary | async)?.twoMade}}
           {{(gameSummary | async)?.threeMade}}
-          {{((gameSummary | async)?.twoMade * 2) + ((gameSummary | async)?.threeMade * 3)}}
+          {{((gameSummary | async)?.twoMade * 2) + ((gameSummary | async)?.threeMade * 3)}} -->
         </p>
       </div>
     </div>
@@ -32,12 +110,24 @@
               <span>{{(player.info | async)?.jerseyNumber}} - {{(player.info | async)?.name}}</span>
             </div>
             <div class="stats-summary">
-              <span class="new badge" data-badge-caption=" - MP"><strong>{{(player.stats | async)?.minutes}}</strong></span>
-              <span class="new badge" data-badge-caption=" - PTS"><strong>{{((player.stats | async)?.twoMade * 2) + ((player.stats | async)?.threeMade * 3) + ((player.stats | async)?.freeMade)}}</strong></span>
-              <span class="new badge" data-badge-caption=" - TRB"><strong>{{((player.stats | async)?.defRebounds) + ((player.stats | async)?.offRebounds)}}</strong></span>
-              <span class="new badge" data-badge-caption=" - AST"><strong>{{(player.stats | async)?.assists}}</strong></span>
-              <span class="new badge" data-badge-caption=" - BLK"><strong>{{(player.stats | async)?.blocks}}</strong></span>
-              <span class="new badge" data-badge-caption=" - STL"><strong>{{(player.stats | async)?.steals}}</strong></span>
+              <span materialize="tooltip" class="new badge tooltipped" data-position="top" data-delay="50" data-tooltip="Minutes Played" data-badge-caption=" - MP">
+                <strong>{{(player.stats | async)?.minutes}}</strong>
+              </span>
+              <span materialize="tooltip" class="new badge tooltipped" data-position="top" data-delay="50" data-tooltip="Points" data-badge-caption=" - PTS">
+                <strong>{{((player.stats | async)?.twoMade * 2) + ((player.stats | async)?.threeMade * 3) + ((player.stats | async)?.freeMade)}}</strong>
+              </span>
+              <span materialize="tooltip" class="new badge tooltipped" data-position="top" data-delay="50" data-tooltip="Total Rebounds" data-badge-caption=" - TRB">
+                <strong>{{((player.stats | async)?.defRebounds) + ((player.stats | async)?.offRebounds)}}</strong>
+              </span>
+              <span materialize="tooltip" class="new badge tooltipped" data-position="top" data-delay="50" data-tooltip="Assists" data-badge-caption=" - AST">
+                <strong>{{(player.stats | async)?.assists}}</strong>
+              </span>
+              <span materialize="tooltip" class="new badge tooltipped" data-position="top" data-delay="50" data-tooltip="Blocks" data-badge-caption=" - BLK">
+                <strong>{{(player.stats | async)?.blocks}}</strong>
+              </span>
+              <span materialize="tooltip" class="new badge tooltipped" data-position="top" data-delay="50" data-tooltip="Steals" data-badge-caption=" - STL">
+                <strong>{{(player.stats | async)?.steals}}</strong>
+              </span>
             </div>
           </div>
         </div>

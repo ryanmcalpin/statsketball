@@ -1,5 +1,7 @@
 <div class="stats-group">
-  <span class="new badge point-title" data-badge-caption="">{{statTitle}} - {{((made / attempt) || '0') | number:'1.2-2'}}%</span>
+  <span materialize="tooltip" [materializeParams]="[{tooltip: statTitle + ' Percentage'}]" class="new badge point-title tooltipped" data-position="top" data-delay="40" data-badge-caption="">
+    {{statTitle}} - {{((made / attempt) || '0') | number:'1.2-2'}}%
+  </span>
   <span class="new badge" data-badge-caption="">Made</span>
   <div class="stats-btn-group">
 
