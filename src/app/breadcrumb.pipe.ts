@@ -11,7 +11,7 @@ export class BreadcrumbPipe implements PipeTransform {
 
   transform(crumb: string[], index: number): any {
     return new Promise((resolve, reject) => {
-      if (['new','edit','teams'].includes(crumb[index])) {
+      if (['new','edit','teams', 'players', 'games'].includes(crumb[index])) {
         resolve(crumb[index]);
       } else if (index === 1 && crumb[0] === 'teams') {
         return this.dbService.getTeamByIdOnce(crumb[index]).then(value => {

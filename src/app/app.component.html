@@ -5,10 +5,10 @@
         <a *ngIf="user" href="#" data-activates="slide-out" class="button-collapse show-on-large" materialize="sideNav" [materializeParams]="[{closeOnClick: true}]"><i class="material-icons">menu</i></a>
         <div class="col s12">
           <a routerLink="" class="breadcrumb">Home</a>
-          <a routerLink="{{routeSection}}" class="breadcrumb" *ngFor="let placeholder of routeSections; let i = index">{{routeSections| breadcrumb:i|async|titlecase}}</a>
+          <a *ngFor="let placeholder of routeSections; let i = index" (click)="navigateToSubURL(routeSections, i)" class="breadcrumb">{{routeSections| breadcrumb:i|async|titlecase}}</a>
           <ul class="right hide-on-med-and-down">
             <li *ngIf="!user"><a (click)="loginGoogleComponent()">Log In</a></li>
-            <li><img src="http://pngimg.com/uploads/basketball/basketball_PNG1096.png" alt="" id="basketball-icon"></li>
+            <li><img routerLink="" src="http://pngimg.com/uploads/basketball/basketball_PNG1096.png" alt="" id="basketball-icon"></li>
           </ul>
         </div>
         <ul id="slide-out" class="side-nav">

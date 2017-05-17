@@ -182,9 +182,22 @@ export class DbService {
   return age;
   }
 
-
   addPlayersToTeam(players: any, teamId: string) {
-    console.log(players, teamId);
+    players.forEach(player => {
+      var playerId = firebase.database().ref('/players').push().key;
+      var updates = {};
+      updates['/teams/'+teamId+'/players/'+playerId] = true;
+      updates['/players/'+playerId] = {
+        name: player.name,
+        position: player.position,
+        height: player.height,
+        weight: player.weight,
+        birthdate: (new Date(player.birthdate).toJSON()),
+        jerseyNumber: player.jerseyNumber,
+        teamId: teamId
+      };
+      firebase.database().ref().update(updates);
+    })
   }
 
   getUserById(userId: string){
