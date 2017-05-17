@@ -50,11 +50,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   navigateToSubURL(urlComponents: string[], index:number){
-    console.log(urlComponents.slice[0,index+1]);
-    // console.log(subURLComponents);
-    // for(let i=0; i<=index; i++){
-    //   subURL += urlComponents[i];
-    // }
-    // console.log(subURL);
+    let subURLComponents = urlComponents.slice(0,index+1);
+    let subURL = subURLComponents.reduce((acc,subComponent)=>{
+      return acc + "/" + subComponent;
+    });
+    this.router.navigate([subURL]);
   }
 }
