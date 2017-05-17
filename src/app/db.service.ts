@@ -124,7 +124,12 @@ export class DbService {
     }).scan((acc, playerStats) => {
       return playerStats.reduce((acc, stats) => {
         let total = {};
-        Object.keys(stats).map(key => total[key] = acc[key] ? acc[key] + stats[key] : stats[key]);
+        if (stats.minutes > 0) {
+          total['gameCount'] = acc.gameCount ? acc.gameCount + 1 : 1;
+          Object.keys(stats).map(key => total[key] = acc[key] ? acc[key] + stats[key] : stats[key]);
+        } else {
+          Object.keys(stats).map(key => total[key] = acc[key] ? acc[key] + 0 : 0);
+        }
         return total;
       }, {});
     }, []);
