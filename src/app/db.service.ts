@@ -128,6 +128,7 @@ export class DbService {
           total['gameCount'] = acc.gameCount ? acc.gameCount + 1 : 1;
           Object.keys(stats).map(key => total[key] = acc[key] ? acc[key] + stats[key] : stats[key]);
         } else {
+          total['gameCount'] = acc.gameCount ? acc.gameCount : 0;
           Object.keys(stats).map(key => total[key] = acc[key] ? acc[key] + 0 : 0);
         }
         return total;

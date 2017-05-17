@@ -50,7 +50,7 @@
             <tr>
               <td>{{gameStats.gameCount}}</td>
               <td>{{gameStats.minutes / gameStats.gameCount}}</td>
-              <td>{{((gameStats.twoMade * 2) + (gameStats.threeMade * 3) + gameStats.freeMade)/gameStats.gameCount}}</td>
+              <td>{{((gameStats.twoMade * 2) + (gameStats.threeMade * 3) + gameStats.freeMade)/gameStats.gameCount | number:'1.2-2'}}</td>
               <td>{{((gameStats.twoMade + gameStats.threeMade)/(gameStats.twoAttempt + gameStats.threeAttempt) || '0') | number:'1.2-2'}}</td>
               <td>{{((gameStats.threeMade/gameStats.threeAttempt) || '0') | number:'1.2-2'}}</td>
               <td>{{((gameStats.freeMade/gameStats.freeAttempt) || '0') | number:'1.2-2'}}</td>
