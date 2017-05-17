@@ -56,16 +56,5 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
     return item.$key;
   }
 
-  increment(player: any, key: string, stats: string) {
-    var updates = {};
-    updates[key] = parseInt(stats) + 1;
-    player.stats.update(updates);
-  }
-  decrement(player: any, key: string, stats: string) {
-    var updates = {};
-    updates[key] = parseInt(stats) - 1;
-    player.stats.update(updates);
-  }
-
 
 }

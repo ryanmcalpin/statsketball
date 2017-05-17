@@ -23,34 +23,62 @@
 </div>
 
 <div class="row">
-  <div class="col s12 m10 offset-m1">
+  <div class="col s12">
     <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
       <li *ngFor="let player of players; trackBy:trackByFn">
-        <div class="collapsible-header">{{(player.info | async)?.jerseyNumber}} - {{(player.info | async)?.name}} - 2s Made {{(player.stats | async)?.twoMade}}</div>
+        <div class="collapsible-header">
+          <div class="player-stats-header">
+            <div class="info">
+              <span>{{(player.info | async)?.jerseyNumber}} - {{(player.info | async)?.name}}</span>
+            </div>
+            <div class="stats-summary">
+              <span class="new badge" data-badge-caption=" - MP"><strong>{{(player.stats | async)?.minutes}}</strong></span>
+              <span class="new badge" data-badge-caption=" - PTS"><strong>{{((player.stats | async)?.twoMade * 2) + ((player.stats | async)?.threeMade * 3) + ((player.stats | async)?.freeMade)}}</strong></span>
+              <span class="new badge" data-badge-caption=" - TRB"><strong>{{((player.stats | async)?.defRebounds) + ((player.stats | async)?.offRebounds)}}</strong></span>
+              <span class="new badge" data-badge-caption=" - AST"><strong>{{(player.stats | async)?.assists}}</strong></span>
+              <span class="new badge" data-badge-caption=" - BLK"><strong>{{(player.stats | async)?.blocks}}</strong></span>
+              <span class="new badge" data-badge-caption=" - STL"><strong>{{(player.stats | async)?.steals}}</strong></span>
+            </div>
+          </div>
+        </div>
         <div class="collapsible-body">
           <div class="stats-section">
-            <app-stats-group [stat]="(player.stats | async)?.twoMade" [statName]="'twoMade'" [statTitle]="'2-Pointers Made'" [player]="player"></app-stats-group>
-            <app-stats-group [stat]="(player.stats | async)?.threeMade" [statName]="'threeMade'" [statTitle]="'3-Pointers Made'" [player]="player"></app-stats-group>
-            <!-- <div class="stats-group">
-              <span class="new badge" data-badge-caption="2-Pointers Made"></span>
-              <div class="stats-btn-group">
-                <button class="btn-floating btn-flat waves-effect waves-light" *ngIf="twoMade.value > 0" (click)="decrement(player, 'twoMade', twoMade.value)"><i class="material-icons black-text">remove</i></button>
-                <button class="btn-floating btn-flat waves-effect waves-light disabled" *ngIf="twoMade.value == 0"><i class="material-icons black-text">remove</i></button>
-                <div class="chip"><h5>{{(player.stats | async)?.twoMade}}</h5></div>
-                <input class="hide" #twoMade [ngModel]="(player.stats | async)?.twoMade">
-                <button class="btn-floating btn-flat waves-effect waves-light" (click)="increment(player, 'twoMade', twoMade.value)"><i class="material-icons black-text">add</i></button>
+            <div class="point-section">
+              <div class="point-group">
+                <!-- 2 Pointers -->
+                <app-point-stats [made]="(player.stats | async)?.twoMade" [madeName]="'twoMade'" [attempt]="(player.stats | async)?.twoAttempt" [attemptName]="'twoAttempt'" [statTitle]="'2P'" [player]="player"></app-point-stats>
+              </div>
+              <div class="point-group">
+                <!-- 3 Pointers -->
+                <app-point-stats [made]="(player.stats | async)?.threeMade" [madeName]="'threeMade'" [attempt]="(player.stats | async)?.threeAttempt" [attemptName]="'threeAttempt'" [statTitle]="'3P'" [player]="player"></app-point-stats>
+              </div>
+              <div class="point-group">
+                <!-- Free Throws -->
+                <app-point-stats [made]="(player.stats | async)?.freeMade" [madeName]="'freeMade'" [attempt]="(player.stats | async)?.freeAttempt" [attemptName]="'freeAttempt'" [statTitle]="'FT'" [player]="player"></app-point-stats>
               </div>
             </div>
-            <div class="stats-group">
-              <span class="new badge" data-badge-caption="3-Pointers Made"></span>
-              <div class="stats-btn-group">
-                <button class="btn-floating btn-flat waves-effect waves-light" *ngIf="threeMade.value > 0" (click)="decrement(player, 'threeMade', threeMade.value)"><i class="material-icons black-text">remove</i></button>
-                <button class="btn-floating btn-flat waves-effect waves-light disabled" *ngIf="threeMade.value == 0"><i class="material-icons black-text">remove</i></button>
-                <div class="chip"><h5>{{(player.stats | async)?.threeMade}}</h5></div>
-                <input class="hide" #threeMade [ngModel]="(player.stats | async)?.threeMade">
-                <button class="btn-floating btn-flat waves-effect waves-light" (click)="increment(player, 'threeMade', threeMade.value)"><i class="material-icons black-text">add</i></button>
-              </div>
-            </div> -->
+            <hr>
+            <div class="rebound-section">
+              <!-- Offensive Rebounds -->
+              <app-stats-group [stat]="(player.stats | async)?.offRebounds" [statName]="'offRebounds'" [statTitle]="'Offensive Rebounds'" [player]="player"></app-stats-group>
+              <!-- Defensive Rebounds -->
+              <app-stats-group [stat]="(player.stats | async)?.defRebounds" [statName]="'defRebounds'" [statTitle]="'Defensive Rebounds'" [player]="player"></app-stats-group>
+              <!-- Assists -->
+              <app-stats-group [stat]="(player.stats | async)?.assists" [statName]="'assists'" [statTitle]="'Assists'" [player]="player"></app-stats-group>
+              <!-- Steals -->
+              <app-stats-group [stat]="(player.stats | async)?.steals" [statName]="'steals'" [statTitle]="'Steals'" [player]="player"></app-stats-group>
+              <!-- Blocks -->
+              <app-stats-group [stat]="(player.stats | async)?.blocks" [statName]="'blocks'" [statTitle]="'Blocks'" [player]="player"></app-stats-group>
+            </div>
+            <hr>
+            <div class="other-section">
+              <!-- Minutes Played -->
+              <app-stats-group [stat]="(player.stats | async)?.minutes" [statName]="'minutes'" [statTitle]="'Minutes Played'" [player]="player"></app-stats-group>
+              <!-- Turnovers -->
+              <app-stats-group [stat]="(player.stats | async)?.turnovers" [statName]="'turnovers'" [statTitle]="'Turnovers'" [player]="player"></app-stats-group>
+              <!-- Fouls -->
+              <app-stats-group [stat]="(player.stats | async)?.fouls" [statName]="'fouls'" [statTitle]="'Fouls'" [player]="player"></app-stats-group>
+            </div>
           </div>
         </div>
       </li>
