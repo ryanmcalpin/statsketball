@@ -27,7 +27,6 @@ export class NewTeamComponent implements OnInit {
       coachName: ['', Validators.required]
     });
     this.positions = this.db.getPositions();
-    console.log(this.positions)
   }
 
   get players(): FormArray {
