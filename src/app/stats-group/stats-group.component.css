@@ -30,11 +30,3 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
-
-
-.stats-section {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
