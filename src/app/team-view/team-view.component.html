@@ -2,7 +2,7 @@
   <div class="col s12 m10 offset-m1">
     <div class="card">
       <div class="card-content">
-        <a *ngIf="user" class="waves-effect waves-light btn modal-trigger right" (click)="openModal()">New Game</a>
+        <a *ngIf="userAssociatedWithTeam?.$key === user?.uid" class="waves-effect waves-light btn modal-trigger right" (click)="openModal()">New Game</a>
         <span class="card-title">{{team?.name}}</span>
         <p>Location: {{team?.location}}</p>
         <p>Coach: {{team?.coachName}}</p>

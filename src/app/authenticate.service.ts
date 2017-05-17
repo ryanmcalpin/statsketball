@@ -33,6 +33,11 @@ export class AuthenticateService {
     }
   }
 
+  switchUser(){
+    this.logout();
+    this.loginGoogle();
+  }
+
   getCurrentUser(){
     return this.user;
   }

@@ -51,6 +51,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authService.logout();
   }
 
+  switchUser(){
+    this.authService.switchUser();
+  }
+
   navigateToSubURL(urlComponents: string[], index:number){
     let subURLComponents = null;
     let subURL = null;
