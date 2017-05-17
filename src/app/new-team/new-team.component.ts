@@ -4,6 +4,8 @@ import { Team } from '../team.model';
 import { Player } from '../player.model';
 import { DbService } from '../db.service';
 import { Router } from '@angular/router';
+import { AuthenticateService } from '../authenticate.service'
+
 
 @Component({
   selector: 'app-new-team',
@@ -14,10 +16,12 @@ export class NewTeamComponent implements OnInit {
 
   newTeamForm: FormGroup;
   positions: any[];
+  currentUserId: any;
 
   constructor(private fb: FormBuilder,
               private db: DbService,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthenticateService) { }
 
   ngOnInit() {
     this.newTeamForm = this.fb.group({
@@ -27,7 +31,9 @@ export class NewTeamComponent implements OnInit {
       coachName: ['', Validators.required]
     });
     this.positions = this.db.getPositions();
-    console.log(this.positions)
+    this.authService.getCurrentUser().subscribe(results=>{
+      this.currentUserId = results.uid;
+    });
   }
 
   get players(): FormArray {
@@ -52,7 +58,10 @@ export class NewTeamComponent implements OnInit {
   createTeam() {
     var {name, location, players, coachName} = this.newTeamForm.value;
     var newTeam = new Team(name, location, coachName);
-    var teamId = this.db.createTeam(newTeam, players);
+    // this.authService.getCurrentUser().subscribe(results=>{
+    //   let currentUserId = results.uid;
+    var teamId = this.db.createTeam(newTeam, players, this.currentUserId);
+    // });
     this.newTeamForm.reset();
     this.router.navigate(['teams', teamId]);
   }

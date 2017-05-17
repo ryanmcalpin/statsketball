@@ -30,12 +30,15 @@ export class DbService {
   return result[0].long;
   }
 
-  createTeam(team: Team, players: Player[]) {
+  createTeam(team: Team, players: Player[], currentUserId: string) {
     var teamId = this.teams.push(team).key;
+
     players.forEach(player => {
       var playerId = firebase.database().ref('/players').push().key;
       var updates = {}
       updates['/teams/'+teamId+'/players/'+playerId] = true;
+      updates['/teams/' + teamId + '/user/' + currentUserId] = true;
+      updates['/users/' + currentUserId + '/teams/' + teamId] = true;
       updates['/players/'+playerId] = {
         name: player.name,
         position: player.position,
