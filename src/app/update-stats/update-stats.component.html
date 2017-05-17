@@ -131,7 +131,7 @@
             </div>
           </div>
         </div>
-        <div class="collapsible-body">
+        <div *ngIf="userAssociatedWithTeam?.$key === user?.uid" class="collapsible-body">
           <div class="stats-section">
             <div class="point-section">
               <div class="point-group">

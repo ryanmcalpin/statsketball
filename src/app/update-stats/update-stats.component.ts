@@ -7,6 +7,7 @@ import { Team } from '../team.model';
 import { Player } from '../player.model';
 import { Game } from '../game.model';
 import { DbService } from '../db.service';
+import { AuthenticateService } from '../authenticate.service';
 
 @Component({
   selector: 'app-update-stats',
@@ -22,10 +23,13 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
   game: any;
   players: any[];
   gameSummary: any;
+  user: any = null;
+  userAssociatedWithTeam: any = null;
 
 
   constructor(private route: ActivatedRoute,
-              private db: DbService) { }
+              private db: DbService,
+              private authService: AuthenticateService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -44,6 +48,13 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
       this.db.getGameById(this.gameId)
         .takeUntil(this.ngUnsubscribe).subscribe(game => this.game = game);
       this.gameSummary = this.db.getGameStats(this.gameId);
+      this.authService.getCurrentUser()
+      .takeUntil(this.ngUnsubscribe).subscribe(userInfo => {
+        this.user = userInfo});
+      this.db.getUserIdAssociatedWithTeam(this.teamId)
+      .takeUntil(this.ngUnsubscribe).subscribe(userId =>{
+          this.db.getUserById(Object.keys(userId)[0]).takeUntil(this.ngUnsubscribe).subscribe(userInfo => this.userAssociatedWithTeam = userInfo);
+      });
     })
   }
 
