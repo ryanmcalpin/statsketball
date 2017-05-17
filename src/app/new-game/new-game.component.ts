@@ -44,7 +44,6 @@ export class NewGameComponent implements OnInit {
 
   addGameIdToPlayers(team, game){
     var gameId = this.db.createGame(this.team, game);
-    console.log(gameId);
-    this.db.addGameToPlayers(this.team, game);
+    this.db.addGameToPlayers(this.team, game, gameId);
   }
 }
