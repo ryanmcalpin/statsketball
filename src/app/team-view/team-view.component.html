@@ -83,10 +83,12 @@
         <ul class="collection">
           <li class="collection-item" *ngFor="let game of games">
             <a routerLink="/teams/{{team.$key}}/games/{{game.$key}}/stats">
-              <span>vs. {{game.opponent}} | </span>
-              <span>Season: {{game.season}} | </span>
-              <span>{{game.date}} | </span>
-              <span>in {{game.location}}</span>
+              <div class="game-list-container">
+                <span class="game-list-item" id="one">vs. {{game.opponent}}</span>
+                <span class="game-list-item" id="two">Season: {{game.season}}</span>
+                <span class="game-list-item" id="three">{{game.date}}</span>
+                <span class="game-list-item" id="four">in {{game.location}}</span>
+              </div>
             </a>
           </li>
         </ul>

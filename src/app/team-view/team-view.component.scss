@@ -1,0 +1,28 @@
+#newGameModal {
+  overflow: visible;
+  height: 70vh;
+  min-height: 650px;
+}
+
+.game-list-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.game-list-item{
+  // text-align: right;
+  flex-basis: 30%;
+  // #one{
+  //   flex-basis: 50%;
+  // }
+  // #two{
+  //   flex-basis: 20%;
+  // }
+  // #three{
+  //   flex-basis: 15%;
+  // }
+  // #four{
+  //   flex-basis: 15%;
+  // }
+}

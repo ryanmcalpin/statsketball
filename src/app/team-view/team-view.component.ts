@@ -15,7 +15,7 @@ import { FormBuilder, FormGroup, FormControl, FormArray, Validators} from '@angu
 @Component({
   selector: 'app-team-view',
   templateUrl: './team-view.component.html',
-  styleUrls: ['./team-view.component.css']
+  styleUrls: ['./team-view.component.scss']
 })
 export class TeamViewComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
