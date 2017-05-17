@@ -53,7 +53,7 @@ export class DbService {
     return teamId;
   }
 
-  createGame(team: any, game: any) {
+    createGame(team: any, game: any) {
     var gameId = firebase.database().ref('/games').push().key;
     var updates = {};
     updates['/games/'+gameId] = game;
@@ -138,6 +138,10 @@ export class DbService {
       Observable.combineLatest(...games.map(game=>
       this.getGameById(game.$key)))
     });
+  }
+
+  getUserIdAssociatedWithTeam(teamId: string){
+    return this.db.object('/teams/' + teamId + '/user/');
   }
 
   getGamesPlayedByPlayer(playerId: string){

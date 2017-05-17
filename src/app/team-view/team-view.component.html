@@ -6,6 +6,7 @@
         <span class="card-title">{{team?.name}}</span>
         <p>Location: {{team?.location}}</p>
         <p>Coach: {{team?.coachName}}</p>
+        <p>Managed on Statsketball by: {{userAssociatedWithTeam?.name}}</p>
         <p>Players: </p>
         <ul class="collection">
           <li class="collection-item" *ngFor="let player of players">
@@ -57,7 +58,7 @@
                   </div>
                 </div>
               </div>
-              <a class="btn waves-effect waves-light" (click)="addPlayer()">Add Player
+              <a *ngIf="userAssociatedWithTeam?.$key === user?.uid" class="btn waves-effect waves-light" (click)="addPlayer()">Add Player
                 <i class="material-icons right">add</i>
               </a>
             </div>
@@ -80,7 +81,7 @@
             </a>
           </li>
         </ul>
-        <a class="waves-effect waves-light btn" (click)="openModal()">Add a Game</a>
+        <a *ngIf="userAssociatedWithTeam?.$key === user?.uid" class="waves-effect waves-light btn" (click)="openModal()">Add a Game</a>
       </div>
     </div>
   </div>

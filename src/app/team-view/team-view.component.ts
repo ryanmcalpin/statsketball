@@ -7,11 +7,10 @@ import { Team } from '../team.model';
 import { Player } from '../player.model';
 import { Game } from '../game.model';
 import { DbService } from '../db.service';
+import { AuthenticateService } from '../authenticate.service';
 import { MaterializeAction } from 'angular2-materialize';
 
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators} from '@angular/forms';
-
-import { AuthenticateService } from '../authenticate.service';
 
 @Component({
   selector: 'app-team-view',
@@ -27,6 +26,8 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   newPlayerForm: FormGroup;
   positions: any[];
   user: any = null;
+  userAssociatedWithTeam: any = null;
+
 
   newGameModal = new EventEmitter<string|MaterializeAction>();
 
@@ -44,6 +45,14 @@ export class TeamViewComponent implements OnInit, OnDestroy {
         .takeUntil(this.ngUnsubscribe).subscribe(players => this.players = players);
       this.db.getGamesPlayedByTeam(this.teamId)
       .takeUntil(this.ngUnsubscribe).subscribe(games => this.games = games);
+      this.authService.getCurrentUser()
+      .takeUntil(this.ngUnsubscribe).subscribe(userInfo => {
+        console.log(userInfo.uid);
+        this.user = userInfo});
+      this.db.getUserIdAssociatedWithTeam(this.teamId)
+      .takeUntil(this.ngUnsubscribe).subscribe(userId =>{
+          this.db.getUserById(Object.keys(userId)[0]).takeUntil(this.ngUnsubscribe).subscribe(userInfo => this.userAssociatedWithTeam = userInfo);
+      });
     });
     this.newPlayerForm = this.fb.group({
       playersF: this.fb.array([]),
