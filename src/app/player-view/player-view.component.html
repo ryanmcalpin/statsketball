@@ -2,10 +2,11 @@
   <div class="col s12 m10 offset-m1">
     <div class="card" *ngIf="currentPlayer">
       <div class="card-image">
-        <img src="https://yarncommunity.org/images/empty.png" alt="person-placeholder" />
+        <img src="{{currentPlayer?.imageURL || 'https://yarncommunity.org/images/empty.png'}}" alt="person-placeholder" />
         <span class="card-title black">{{currentPlayer.name}}</span>
       </div>
       <div class="card-content">
+        <p>Jersey Number: {{currentPlayer?.jerseyNumber}}</p>
         <p>Age: {{db.calculateAge(currentPlayer.birthdate)}}</p>
         <p>Height: {{db.convertInchesToFeetAndInches(currentPlayer.height).ft}} {{db.convertInchesToFeetAndInches(currentPlayer.height).in}}</p>
         <p>Position: {{db.getLongPosition(currentPlayer.position)}}</p>

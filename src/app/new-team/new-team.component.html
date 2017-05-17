@@ -52,6 +52,12 @@
             <label for="player-number">Player #{{i + 1}} Jersey Number</label>
           </div>
         </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input type="url" id="player-imgURL" formControlName="imageURL">
+            <label for="player-imgURL">Player #{{i + 1}} Profile Image URL</label>
+          </div>
+        </div>
       </div>
       <button class="btn waves-effect waves-light" (click)="addPlayer()">Add Player
         <i class="material-icons right">add</i>

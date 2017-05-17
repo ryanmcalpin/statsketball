@@ -48,7 +48,6 @@ export class TeamViewComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe).subscribe(games => this.games = games);
       this.authService.getCurrentUser()
       .takeUntil(this.ngUnsubscribe).subscribe(userInfo => {
-        console.log(userInfo.uid);
         this.user = userInfo});
       this.db.getUserIdAssociatedWithTeam(this.teamId)
       .takeUntil(this.ngUnsubscribe).subscribe(userId =>{
@@ -72,7 +71,8 @@ export class TeamViewComponent implements OnInit, OnDestroy {
       height: [''],
       weight: [''],
       birthdate: [''],
-      jerseyNumber: ['']
+      jerseyNumber: [''],
+      imageURL: ['']
     }))
   }
 

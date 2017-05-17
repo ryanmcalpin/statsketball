@@ -47,7 +47,8 @@ export class NewTeamComponent implements OnInit {
       height: [''],
       weight: [''],
       birthdate: [''],
-      jerseyNumber: ['']
+      jerseyNumber: [''],
+      imageURL: ['']
     }))
   }
 
@@ -58,10 +59,7 @@ export class NewTeamComponent implements OnInit {
   createTeam() {
     var {name, location, players, coachName} = this.newTeamForm.value;
     var newTeam = new Team(name, location, coachName);
-    // this.authService.getCurrentUser().subscribe(results=>{
-    //   let currentUserId = results.uid;
     var teamId = this.db.createTeam(newTeam, players, this.currentUserId);
-    // });
     this.newTeamForm.reset();
     this.router.navigate(['teams', teamId]);
   }

@@ -46,7 +46,8 @@ export class DbService {
         weight: player.weight,
         birthdate: (new Date(player.birthdate).toJSON()),
         jerseyNumber: player.jerseyNumber,
-        teamId: teamId
+        teamId: teamId,
+        imageURL: player.imageURL
       };
       firebase.database().ref().update(updates);
     })
@@ -201,7 +202,8 @@ export class DbService {
         weight: player.weight,
         birthdate: (new Date(player.birthdate).toJSON()),
         jerseyNumber: player.jerseyNumber,
-        teamId: teamId
+        teamId: teamId,
+        imageURL: player.imageURL
       };
       firebase.database().ref().update(updates);
     })

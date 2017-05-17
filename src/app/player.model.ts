@@ -1,3 +1,3 @@
 export class Player {
-  constructor(public name: string, public position: string, public jerseyNumber: number, public height: number, public weight: number, public birthdate: string) { }
+  constructor(public name: string, public position: string, public jerseyNumber: number, public height: number, public weight: number, public birthdate: string, public imageURL: string) { }
 }
