@@ -3,9 +3,14 @@
     <div class="card">
       <div class="card-content">
         <a *ngIf="user" class="waves-effect waves-light btn modal-trigger right" (click)="openModal()">New Game</a>
-        <span class="card-title">{{team?.name}}</span>
-        <p>Location: {{team?.location}}</p>
-        <p>Coach: {{team?.coachName}}</p>
+
+        <div *ngIf="!editing">
+          <span class="card-title">{{team?.name}} <i (click)="clickEdit()" class="tiny material-icons clickable">mode_edit</i></span>
+          <p>Location: {{team?.location}}</p>
+          <p>Coach: {{team?.coachName}}</p>
+        </div>
+        <app-edit-team *ngIf="editing" [teamId]="teamId" [team]="team" (finishSender)="finishEdit()"></app-edit-team>
+
         <p>Players: </p>
         <ul class="collection">
           <li class="collection-item" *ngFor="let player of players">
