@@ -212,7 +212,7 @@ export class DbService {
     return retrievedUser;
   }
 
-  addGameToPlayers(team: any, game: any, gameId:string) {
+  addGameToPlayers(team: any, gameId:string) {
     var updates = {};
     Object.keys(team.players).forEach(player => {
       updates['/players/'+ player + '/gamesPlayed/'+ gameId] = true;
