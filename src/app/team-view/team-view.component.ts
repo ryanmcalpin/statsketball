@@ -66,11 +66,19 @@ export class TeamViewComponent implements OnInit, OnDestroy {
     }))
   }
 
+  removePlayer(index: number) {
+    this.playersF.removeAt(index);
+  }
+
   savePlayers(){
     var {playersF} = this.newPlayerForm.value;
     this.db.addPlayersToTeam(playersF, this.teamId);
     this.authService.getCurrentUser()
       .takeUntil(this.ngUnsubscribe).subscribe(user=> this.user = user);
+    this.newPlayerForm.reset();
+    for (var i=0; i<playersF.length; i++) {
+      this.removePlayer(i);
+    }
   }
 
   ngOnDestroy() {
