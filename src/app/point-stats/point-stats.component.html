@@ -1,14 +1,16 @@
 <div class="stats-group">
-  <span class="new badge point-title" data-badge-caption="">{{statTitle}} - {{((made / attempt) || '0') | number:'1.2-2'}}%</span>
+  <span materialize="tooltip" [materializeParams]="[{tooltip: statTitle + ' Percentage'}]" class="new badge point-title tooltipped" data-position="top" data-delay="40" data-badge-caption="">
+    {{statTitle}} - {{((made / attempt) || '0') | number:'1.2-2'}}%
+  </span>
   <span class="new badge" data-badge-caption="">Made</span>
   <div class="stats-btn-group">
 
-    <button class="btn-floating btn-flat waves-effect waves-light" *ngIf="madeVal.value > 0" (click)="decrementMade(madeVal.value, attemptVal.value)"><i class="material-icons black-text">remove</i></button>
+    <button class="btn-floating btn-flat waves-effect waves-light" *ngIf="made > 0" (click)="decrementMade(madeVal.value, attemptVal.value)"><i class="material-icons black-text">remove</i></button>
 
-    <button class="btn-floating btn-flat waves-effect waves-light disabled" *ngIf="madeVal.value == 0"><i class="material-icons black-text">remove</i></button>
+    <button class="btn-floating btn-flat waves-effect waves-light disabled" *ngIf="made == 0"><i class="material-icons black-text">remove</i></button>
 
     <div class="chip"><h5>{{made}}</h5></div>
-    <input class="hide" #madeVal [ngModel]="made">
+    <input type="number" class="hide" #madeVal [ngModel]="made">
 
     <button class="btn-floating btn-flat waves-effect waves-light" (click)="incrementMade(madeVal.value, attemptVal.value)"><i class="material-icons black-text">add</i></button>
   </div>
@@ -17,9 +19,9 @@
   <span class="new badge" data-badge-caption="">Missed</span>
   <div class="stats-btn-group">
 
-    <button class="btn-floating btn-flat waves-effect waves-light" *ngIf="attemptVal.value > madeVal.value" (click)="decrementMiss(player, attemptName, attemptVal.value)"><i class="material-icons black-text">remove</i></button>
+    <button class="btn-floating btn-flat waves-effect waves-light" *ngIf="attempt > made" (click)="decrementMiss(player, attemptName, attemptVal.value)"><i class="material-icons black-text">remove</i></button>
 
-    <button class="btn-floating btn-flat waves-effect waves-light disabled" *ngIf="attemptVal.value == madeVal.value"><i class="material-icons black-text">remove</i></button>
+    <button class="btn-floating btn-flat waves-effect waves-light disabled" *ngIf="attempt == made"><i class="material-icons black-text">remove</i></button>
 
     <div class="chip"><h5>{{attempt - made}}</h5></div>
     <input class="hide" #attemptVal [ngModel]="attempt">
