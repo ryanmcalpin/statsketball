@@ -26,8 +26,16 @@
       <li *ngFor="let player of players; trackBy:trackByFn">
         <div class="collapsible-header">{{(player.info | async)?.name}}</div>
         <div class="collapsible-body">
-          
-          <input materialize type="number" [ngModel]="(player.stats | async)?.twoMade" (ngModelChange)="player.stats.update({twoMade: $event})">
+          <div class="stats-group">
+            <span class="new badge" data-badge-caption="2-Pointers Made"></span>
+            <div class="stats-btn-group">
+              <button class="btn-floating btn-flat waves-effect waves-light" *ngIf="twoMade.value > 0" (click)="decrement(player, 'twoMade', twoMade.value)"><i class="material-icons black-text">remove</i></button>
+              <button class="btn-floating btn-flat waves-effect waves-light disabled" *ngIf="twoMade.value == 0"><i class="material-icons black-text">remove</i></button>
+              <div class="chip"><h5>{{(player.stats | async)?.twoMade}}</h5></div>
+              <input class="hide" #twoMade [ngModel]="(player.stats | async)?.twoMade">
+              <button class="btn-floating btn-flat waves-effect waves-light" (click)="increment(player, 'twoMade', twoMade.value)"><i class="material-icons black-text">add</i></button>
+            </div>
+          </div>
         </div>
       </li>
     </ul>
