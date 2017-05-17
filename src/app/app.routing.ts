@@ -30,12 +30,7 @@ const appRoutes: Routes = [
   {
     path: 'teams/:teamId/players/:playerId',
     component: PlayerViewComponent
-  },
-  {
-    path: 'teams/new',
-    component: NewTeamComponent
   }
-
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
