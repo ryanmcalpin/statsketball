@@ -1,3 +1,23 @@
-<p>
-  edit-team works!
-</p>
+<form materialize [formGroup]="editTeamForm">
+  <div class="row">
+    <div class="col s12 input-field">
+      <input type="text" id="team-name" formControlName="name" required>
+      <label for="team-name">Team Name</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s6 input-field">
+      <input type="text" id="location" formControlName="location" required>
+      <label for="location">Team Location</label>
+    </div>
+    <div class="col s6 input-field">
+      <input type="text" id="coach-name" formControlName="coachName" required>
+      <label for="coach-name">Coach Name</label>
+    </div>
+  </div>
+  <div class="row">
+    <button type="button" [disabled]="!editTeamForm.valid" class="btn waves-effect waves-light" (click)="finishEdit()">Finish Editing
+      <i class="material-icons right">send</i>
+    </button>
+  </div>
+</form>

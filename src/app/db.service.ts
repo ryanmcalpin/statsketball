@@ -213,4 +213,9 @@ export class DbService {
     firebase.database().ref().update(updates);
     return gameId;
   }
+
+  updateTeam(teamId: string, team: any) {
+    console.log(teamId, team);
+    this.teams.update(teamId, team);
+  }
 }
