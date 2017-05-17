@@ -205,4 +205,15 @@ export class DbService {
     return retrievedUser;
   }
 
+  addGameToPlayers(team: any, game: any) {
+    var gameId = firebase.database().ref('/games').push().key;
+    var updates = {};
+    Object.keys(team.players).forEach(player => {
+      updates['/players/'+player + '/gamesPlayed'] = {
+        gameId: true,
+      }
+    })
+    firebase.database().ref().update(updates);
+    return gameId;
+  }
 }
