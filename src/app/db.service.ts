@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/scan';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { Team } from './team.model';
@@ -41,6 +42,7 @@ export class DbService {
         height: player.height,
         weight: player.weight,
         birthdate: (new Date(player.birthdate).toJSON()),
+        jerseyNumber: player.jerseyNumber,
         teamId: teamId
       };
       firebase.database().ref().update(updates);
@@ -109,6 +111,18 @@ export class DbService {
 
   getPlayerGameStats(gameId: string, playerId: string) {
     return this.db.object('/singleGamePlayerStats/'+gameId+'/'+playerId);
+  }
+
+  getGameStats(gameId: string) {
+    return this.db.list('/singleGamePlayerStats/'+gameId).scan((acc, players) => {
+      return players.reduce((acc, player) => {
+        let total = {};
+        Object.keys(player).map(key => {
+          total[key] = acc[key] ? acc[key] + player[key] : player[key];
+        })
+        return total;
+      }, {});
+    }, []);
   }
 
   getPlayersOnTeam(teamId: string){

@@ -21,6 +21,7 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
   team: any;
   game: any;
   players: any[];
+  gameSummary: any;
 
 
   constructor(private route: ActivatedRoute,
@@ -42,7 +43,7 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
         });
       this.db.getGameById(this.gameId)
         .takeUntil(this.ngUnsubscribe).subscribe(game => this.game = game);
-
+      this.gameSummary = this.db.getGameStats(this.gameId);
     })
   }
 

@@ -32,8 +32,8 @@ export class TeamViewComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private db: DbService,
-              private fb: FormBuilder) { }
-              private db: DbService, private authService: AuthenticateService) { }
+              private fb: FormBuilder,
+              private authService: AuthenticateService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
