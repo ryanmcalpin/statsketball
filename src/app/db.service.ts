@@ -117,9 +117,7 @@ export class DbService {
     return this.db.list('/singleGamePlayerStats/'+gameId).scan((acc, players) => {
       return players.reduce((acc, player) => {
         let total = {};
-        Object.keys(player).map(key => {
-          total[key] = acc[key] ? acc[key] + player[key] : player[key];
-        })
+        Object.keys(player).map(key => total[key] = acc[key] ? acc[key] + player[key] : player[key])
         return total;
       }, {});
     }, []);
