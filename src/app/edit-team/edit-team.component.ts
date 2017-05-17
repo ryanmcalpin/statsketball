@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators} from '@angular/forms';
 import { DbService } from '../db.service';
 import { Team } from '../team.model';
@@ -12,6 +12,7 @@ import { Team } from '../team.model';
 export class EditTeamComponent implements OnInit {
   @Input() teamId: string;
   @Input() team;
+  @Output() finishSender = new EventEmitter();
   editTeamForm: FormGroup;
 
   constructor(private fb: FormBuilder,
@@ -29,6 +30,8 @@ export class EditTeamComponent implements OnInit {
     var {name, location, coachName} = this.editTeamForm.value;
     var editedTeam = new Team(name, location, coachName);
     this.db.updateTeam(this.teamId, editedTeam);
+    this.editTeamForm.reset();
+    this.finishSender.emit();
   }
 
 }

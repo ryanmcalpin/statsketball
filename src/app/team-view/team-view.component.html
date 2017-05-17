@@ -9,7 +9,7 @@
           <p>Location: {{team?.location}}</p>
           <p>Coach: {{team?.coachName}}</p>
         </div>
-        <app-edit-team *ngIf="editing" [teamId]="teamId" [team]="team"></app-edit-team>
+        <app-edit-team *ngIf="editing" [teamId]="teamId" [team]="team" (finishSender)="finishEdit()"></app-edit-team>
 
         <p>Players: </p>
         <ul class="collection">

@@ -98,4 +98,8 @@ export class TeamViewComponent implements OnInit, OnDestroy {
     this.editing = true;
   }
 
+  finishEdit() {
+    this.editing = false;
+  }
+
 }
