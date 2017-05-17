@@ -5,53 +5,54 @@
 ## May 15-18, 2017
 
 ## User stories
-- [ ] As a user, I'd like to create a basketball team
-- [ ] As a user, I'd like to create a player
-- [ ] As a user, I'd like to be able to add players to my team (any time of season)
+- [x] As a user, I'd like to create a basketball team
+- [x] As a user, I'd like to create a player
+- [x] As a user, I'd like to be able to add players to my team (any time of season)
 - [ ] As a user, I'd like to be able to remove players from my team (any time of season)...retaining their contributing stats, but removes player ID from team. The player object doesn't actually get deleted.
 - [ ] As a user, I'd like to delete a player from the system. Go ahead and remove all references to that player ID.
 - [ ] As a user, I'd like to be able to edit a player profile (e.g., aging, weight gain, etc.)
 
 
-- [ ] As a user, I'd like to be able to add a game to my season. This would entail indicating team ID, opponent.
-- [ ] As a user, I'd like to be able to add stats to an individual player. As soon as a stat gets recorded, adds their Id to the game, +1 to games this season, etc.
+- [x] As a user, I'd like to be able to add a game to my season. This would entail indicating team ID, opponent.
+- [x] As a user, I'd like to be able to add stats to an individual player.
+- [ ] As soon as a stat gets recorded, adds their Id to the game, +1 to games this season, etc.
 
 - [ ] As a user, I'd like to be able to see each player's total attempts and goals, minutes played, position, etc. for each season.
-- [ ] As a user, I'd like to be able to see a game's total attempts and goals, etc., for each game that has already been played for each season.
-- [ ] As a user, I'd like to be able to click on a particular game and see game-specific stats for all players that participated in that game
+- [x] As a user, I'd like to be able to see a game's total attempts and goals, etc., for each game that has already been played for each season.
+- [x] As a user, I'd like to be able to click on a particular game and see game-specific stats for all players that participated in that game
 - [ ] As a user, I'd like to be able to view the roster of a team
 
 
 ## Forms
-- [ ] new-team
+- [x] new-team
 - [ ] edit-team
-- [ ] new-player
+- [x] new-player
 - [ ] edit-player
-- [ ] new-game
+- [x] new-game
 - [ ] edit-game
-- [ ] update-stats
+- [x] update-stats
 
 ## Components
-- [ ] new-team
-  - [ ] new-player
+- [x] new-team
+  - [x] new-player
   - [ ] edit-player
 - [ ] edit-team
-- [ ] new-game
+- [x] new-game
 - [ ] edit-game
-- [ ] team-view
-  - [ ] player-view
-  - [ ] game-view
-    - [ ] update-stats
-- [ ] team-list
+- [x] team-view
+  - [x] player-view
+  - [x] game-view
+    - [x] update-stats
+- [x] team-list
 
 ## Routes
-- [ ] '/teams'
-- [ ] '/teams/new' (adding and removing players happens here)
-- [ ] '/teams/:teamId'
+- [x] '/teams'
+- [x] '/teams/new' (adding and removing players happens here)
+- [x] '/teams/:teamId'
 - [ ] '/teams/:teamId/edit' (adding and editing players happens here, too)
-- [ ] '/teams/:teamId/players/:playerId'
-- [ ] '/teams/:teamId/games/new'
-- [ ] '/teams/:teamId/games/:gameId'
+- [x] '/teams/:teamId/players/:playerId'
+- [-] '/teams/:teamId/games/new'
+- [x] '/teams/:teamId/games/:gameId/stats'
 
 ## Pipes
 - [ ] calculateStats
@@ -77,17 +78,17 @@
     - [x] position
     - [x] height
     - [x] weight
-    - [ ] birthdate (age calculated; currently timestamp)
-    - [ ] gamesPlayed ... firebase {key, true--> null when we want to remove}
+    - [x] birthdate (age calculated; currently timestamp)
+    - [x] gamesPlayed ... firebase {key, true--> null when we want to remove}
 
 - [ ] games
-  - [ ] id (matching key in gamesPlayed)....?
-    - [ ] teamId (just yours)
-    - [ ] opponent {Team obj with no players}
+  - [x] id (matching key in gamesPlayed)....?
+    - [x] teamId (just yours)
+    - [x] opponent {Team obj with no players}
     - [ ] season (standardized; limit input)
-    - [ ] gameLocation
-    - [ ] gameDate
-    - [ ] playersInGame (keys of players)
+    - [x] location
+    - [x] date
+    - [-] playersInGame (keys of players)...don't need because we have teamId
 
 - [ ] singleGamePlayerStats
   - [ ] game id (matching key in game?)
