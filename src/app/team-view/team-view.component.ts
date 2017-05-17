@@ -27,6 +27,7 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   positions: any[];
   user: any = null;
   userAssociatedWithTeam: any = null;
+  editing: boolean = false;
 
 
   newGameModal = new EventEmitter<string|MaterializeAction>();
@@ -100,6 +101,14 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   }
   closeModal() {
     this.newGameModal.emit({action:"modal",params:['close']});
+  }
+
+  clickEdit() {
+    this.editing = true;
+  }
+
+  finishEdit() {
+    this.editing = false;
   }
 
 }
