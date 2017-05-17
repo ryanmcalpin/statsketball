@@ -16,9 +16,9 @@
             <div class="background">
               <img src="https://media.licdn.com/mpr/mpr/p/1/005/0a3/3c9/203d1eb.jpg">
             </div>
-            <a><img class="circle" src="{{userObjFromDb.photoURL}}"></a>
-            <a><span class="white-text name">{{userObjFromDb.name}}</span></a>
-            <a><span class="white-text email">{{userObjFromDb.email}}</span></a>
+            <a><img class="circle" src="{{userObjFromDb?.photoURL}}"></a>
+            <a><span class="white-text name">{{userObjFromDb?.name}}</span></a>
+            <a><span class="white-text email">{{userObjFromDb?.email}}</span></a>
           </div></li>
           <li><div class="divider"></div></li>
           <li><a (click)="logoutComponent()">Log Out</a></li>

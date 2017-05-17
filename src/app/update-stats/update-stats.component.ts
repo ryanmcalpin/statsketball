@@ -21,6 +21,7 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
   team: any;
   game: any;
   players: any[];
+  gameSummary: any;
 
 
   constructor(private route: ActivatedRoute,
@@ -42,7 +43,7 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
         });
       this.db.getGameById(this.gameId)
         .takeUntil(this.ngUnsubscribe).subscribe(game => this.game = game);
-
+      this.gameSummary = this.db.getGameStats(this.gameId);
     })
   }
 
@@ -53,6 +54,17 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
 
   trackByFn(index: any, item: any) {
     return item.$key;
+  }
+
+  increment(player: any, key: string, stats: string) {
+    var updates = {};
+    updates[key] = parseInt(stats) + 1;
+    player.stats.update(updates);
+  }
+  decrement(player: any, key: string, stats: string) {
+    var updates = {};
+    updates[key] = parseInt(stats) - 1;
+    player.stats.update(updates);
   }
 
 

@@ -13,7 +13,9 @@
     <div class="card">
       <div class="card-content">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          {{(gameSummary | async)?.twoMade}}
+          {{(gameSummary | async)?.threeMade}}
+          {{((gameSummary | async)?.twoMade * 2) + ((gameSummary | async)?.threeMade * 3)}}
         </p>
       </div>
     </div>
@@ -24,10 +26,28 @@
   <div class="col s12 m10 offset-m1">
     <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
       <li *ngFor="let player of players; trackBy:trackByFn">
-        <div class="collapsible-header">{{(player.info | async)?.name}}</div>
+        <div class="collapsible-header">{{(player.info | async)?.jerseyNumber}} - {{(player.info | async)?.name}} - 2s Made {{(player.stats | async)?.twoMade}}</div>
         <div class="collapsible-body">
-          
-          <input materialize type="number" [ngModel]="(player.stats | async)?.twoMade" (ngModelChange)="player.stats.update({twoMade: $event})">
+          <div class="stats-group">
+            <span class="new badge" data-badge-caption="2-Pointers Made"></span>
+            <div class="stats-btn-group">
+              <button class="btn-floating btn-flat waves-effect waves-light" *ngIf="twoMade.value > 0" (click)="decrement(player, 'twoMade', twoMade.value)"><i class="material-icons black-text">remove</i></button>
+              <button class="btn-floating btn-flat waves-effect waves-light disabled" *ngIf="twoMade.value == 0"><i class="material-icons black-text">remove</i></button>
+              <div class="chip"><h5>{{(player.stats | async)?.twoMade}}</h5></div>
+              <input class="hide" #twoMade [ngModel]="(player.stats | async)?.twoMade">
+              <button class="btn-floating btn-flat waves-effect waves-light" (click)="increment(player, 'twoMade', twoMade.value)"><i class="material-icons black-text">add</i></button>
+            </div>
+          </div>
+          <div class="stats-group">
+            <span class="new badge" data-badge-caption="3-Pointers Made"></span>
+            <div class="stats-btn-group">
+              <button class="btn-floating btn-flat waves-effect waves-light" *ngIf="threeMade.value > 0" (click)="decrement(player, 'threeMade', threeMade.value)"><i class="material-icons black-text">remove</i></button>
+              <button class="btn-floating btn-flat waves-effect waves-light disabled" *ngIf="threeMade.value == 0"><i class="material-icons black-text">remove</i></button>
+              <div class="chip"><h5>{{(player.stats | async)?.threeMade}}</h5></div>
+              <input class="hide" #threeMade [ngModel]="(player.stats | async)?.threeMade">
+              <button class="btn-floating btn-flat waves-effect waves-light" (click)="increment(player, 'threeMade', threeMade.value)"><i class="material-icons black-text">add</i></button>
+            </div>
+          </div>
         </div>
       </li>
     </ul>

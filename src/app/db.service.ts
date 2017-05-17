@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/scan';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { Team } from './team.model';
@@ -41,6 +42,7 @@ export class DbService {
         height: player.height,
         weight: player.weight,
         birthdate: (new Date(player.birthdate).toJSON()),
+        jerseyNumber: player.jerseyNumber,
         teamId: teamId
       };
       firebase.database().ref().update(updates);
@@ -111,6 +113,16 @@ export class DbService {
     return this.db.object('/singleGamePlayerStats/'+gameId+'/'+playerId);
   }
 
+  getGameStats(gameId: string) {
+    return this.db.list('/singleGamePlayerStats/'+gameId).scan((acc, players) => {
+      return players.reduce((acc, player) => {
+        let total = {};
+        Object.keys(player).map(key => total[key] = acc[key] ? acc[key] + player[key] : player[key])
+        return total;
+      }, {});
+    }, []);
+  }
+
   getPlayersOnTeam(teamId: string){
     return this.db.list('teams/' + teamId + '/players').switchMap(players=>{
       return players.length===0 ? Observable.of([]) : Observable.combineLatest(...players.map(player => this.getPlayerById(player.$key)))
@@ -168,6 +180,24 @@ export class DbService {
       age--;
     }
   return age;
+  }
+
+  addPlayersToTeam(players: any, teamId: string) {
+    players.forEach(player => {
+      var playerId = firebase.database().ref('/players').push().key;
+      var updates = {};
+      updates['/teams/'+teamId+'/players/'+playerId] = true;
+      updates['/players/'+playerId] = {
+        name: player.name,
+        position: player.position,
+        height: player.height,
+        weight: player.weight,
+        birthdate: (new Date(player.birthdate).toJSON()),
+        jerseyNumber: player.jerseyNumber,
+        teamId: teamId
+      };
+      firebase.database().ref().update(updates);
+    })
   }
 
   getUserById(userId: string){
