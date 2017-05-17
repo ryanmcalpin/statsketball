@@ -53,7 +53,7 @@ export class DbService {
     return teamId;
   }
 
-    createGame(team: any, game: any) {
+  createGame(team: any, game: any) {
     var gameId = firebase.database().ref('/games').push().key;
     var updates = {};
     updates['/games/'+gameId] = game;
@@ -114,6 +114,20 @@ export class DbService {
 
   getPlayerGameStats(gameId: string, playerId: string) {
     return this.db.object('/singleGamePlayerStats/'+gameId+'/'+playerId);
+  }
+
+  getPlayerAllGameStats(playerId: string) {
+    return this.db.list('/players/' + playerId + '/gamesPlayed').switchMap(games => {
+      return games.length === 0 ? Observable.of([]) : Observable.combineLatest(...games.map(game => {
+        return this.getPlayerGameStats(game.$key, playerId);
+      }))
+    }).scan((acc, playerStats) => {
+      return playerStats.reduce((acc, stats) => {
+        let total = {};
+        Object.keys(stats).map(key => total[key] = acc[key] ? acc[key] + stats[key] : stats[key]);
+        return total;
+      }, {});
+    }, []);
   }
 
   getGameStats(gameId: string) {
