@@ -2,13 +2,3 @@
   height: 327px;
   width: auto;
 }
-
-.game-list-container{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.game-list-item{
-  flex-basis: 25%;
-}

@@ -12,9 +12,7 @@ import { AuthenticateService } from '../authenticate.service';
 })
 export class TeamListComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
-  adminLoggedIn: boolean = true; // TODO change this
   user: any = null;
-
   teams: any[];
   players: any[];
   constructor(public db: DbService,

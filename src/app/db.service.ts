@@ -252,6 +252,11 @@ export class DbService {
     this.db.list('/players').update(playerId, player);
   }
 
+  getTeamsAssociatedWithUser(userId: string){
+    return this.db.list('/users/' + userId + '/teams/').switchMap(teams=>{
+      return teams.length === 0 ? Observable.of([]) : Observable.combineLatest(...teams.map(team=>this.getTeamById(team.$key)))
+    });
+  }
 
   deleteTeam(team: any) {
     if (team.players) {
