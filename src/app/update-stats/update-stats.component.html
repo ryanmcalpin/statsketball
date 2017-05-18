@@ -6,7 +6,6 @@
         <p>Location: <span class="right">{{game?.location}}</span></p>
         <p>Date: <span class="right">{{game?.date}}</span></p>
         <p>Season: <span class="right">{{game?.season}}</span></p>
-        <button (click)="deleteGame()">delete</button>
       </div>
     </div>
   </div>
@@ -14,6 +13,11 @@
     <div class="card">
       <div class="card-content">
         <h5 class="center-align">Game Summary</h5>
+        <div *ngIf="userAssociatedWithTeam?.$key === user?.uid" class="fixed-action-btn horizontal butticon">
+          <a (click)="deleteGame()" class="btn-floating red darken-3">
+            <i class="small material-icons">delete</i>
+          </a>
+        </div>
         <div class="game-summary">
           <!-- Points -->
           <div class="game-point-summary">

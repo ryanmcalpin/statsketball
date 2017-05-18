@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import 'rxjs/add/operator/takeUntil';
 import { Subject } from 'rxjs/Subject';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Team } from '../team.model';
 import { Player } from '../player.model';
@@ -29,7 +29,8 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private db: DbService,
-              private authService: AuthenticateService) { }
+              private authService: AuthenticateService,
+              private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -68,7 +69,9 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
   }
 
   deleteGame() {
-    this.db.deleteGame(this.gameId);
+    if(confirm("Are you sure you want to delete the game?")){
+      this.db.deleteGame(this.gameId);
+      this.router.navigate(['teams', this.teamId]);
+    }
   }
-
 }
