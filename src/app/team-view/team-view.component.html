@@ -10,6 +10,7 @@
           <p>Managed on Statsketball by: {{userAssociatedWithTeam?.name}}</p>
         </div>
         <app-edit-team *ngIf="editing" [teamId]="teamId" [team]="team" (finishSender)="finishEdit()"></app-edit-team>
+        <button (click)="deleteTeam()">delete</button>
         <p>Players: </p>
         <ul class="collection">
           <li class="collection-item" *ngFor="let player of players">
