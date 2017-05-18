@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import 'rxjs/add/operator/takeUntil';
 import { Subject } from 'rxjs/Subject';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Team } from '../team.model';
 import { Player } from '../player.model';
@@ -28,6 +28,7 @@ export class PlayerViewComponent implements OnInit, OnDestroy {
   userAssociatedWithTeam: any = null;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private db: DbService,
               private authService: AuthenticateService) { }
 
@@ -71,6 +72,9 @@ export class PlayerViewComponent implements OnInit, OnDestroy {
   }
 
   deletePlayer() {
-    this.db.deletePlayer(this.playerId);
+    if (confirm("Are you sure you want to delete this player?")) {
+      this.db.deletePlayer(this.playerId);
+      this.router.navigate(['teams', this.teamId]);
+    }
   }
 }
