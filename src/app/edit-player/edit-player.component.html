@@ -1,3 +1,38 @@
-<p>
-  edit-player works!
-</p>
+<form materialize [formGroup]="editPlayerForm">
+  <div class="row">
+    <div class="input-field col s6">
+      <input type="text" id="player-name" formControlName="name" required>
+      <label for="player-name">Name</label>
+    </div>
+    <div class="input-field col s6">
+      <select id="player-position" materialize="material_select" [materializeSelectOptions]="positions" formControlName="position" required>
+        <option value="" disabled selected>Choose a position</option>
+        <option *ngFor="let option of positions" [value]="option.short">{{option.long}}</option>
+      </select>
+      <label for="player-position">Position</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s3">
+      <input type="number" id="player-height" formControlName="height" required>
+      <label for="player-height">Height</label>
+    </div>
+    <div class="input-field col s3">
+      <input type="number" id="player-weight" formControlName="weight" required>
+      <label for="player-weight">Weight</label>
+    </div>
+    <div class="input-field col s3">
+      <input type="date" id="player-birthdate" class="datepicker" materialize="pickadate" [materializeParams]="[{selectYears: 20}]" formControlName="birthdate" required>
+      <label for="player-birthdate">Birthdate</label>
+    </div>
+    <div class="input-field col s3">
+      <input type="number" id="player-number" formControlName="jerseyNumber" required>
+      <label for="player-number">Jersey Number</label>
+    </div>
+  </div>
+  <div class="row">
+    <button type="button" [disabled]="!editPlayerForm.valid" class="btn waves-effect waves-light" (click)="clickFinish()">Finish Editing
+      <i class="material-icons right">send</i>
+    </button>
+  </div>
+</form>
