@@ -6,6 +6,7 @@
         <span class="card-title black">{{currentPlayer.name}} <i *ngIf="userAssociatedWithTeam?.$key === user?.uid" (click)="clickEdit()" class="small material-icons clickable">mode_edit</i></span>
       </div>
       <div class="card-content">
+        <button (click)="deletePlayer()">delete</button>
         <p>Jersey Number: {{currentPlayer?.jerseyNumber}}</p>
         <p>Age: {{db.calculateAge(currentPlayer.birthdate)}}</p>
         <p>Height: {{db.convertInchesToFeetAndInches(currentPlayer.height).ft}} {{db.convertInchesToFeetAndInches(currentPlayer.height).in}}</p>

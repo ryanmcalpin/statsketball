@@ -250,4 +250,23 @@ export class DbService {
   updatePlayer(playerId: string, player: any) {
     this.db.list('/players').update(playerId, player);
   }
+
+
+  deleteTeam(teamId: string) {
+
+  }
+
+  deletePlayer(player: any) {
+    var updates = {};
+    updates['/teams/' + player.teamId + '/players/' + player.$key] = null;
+    Object.keys(player.gamesPlayed).forEach(gameId => {
+      updates['/singleGamePlayerStats/' + gameId + '/' + player.$key] = null;
+    })
+    updates['/players/' + player.$key] = null;
+    firebase.database().ref().update(updates);
+  }
+
+  deleteGame(gameId: string) {
+
+  }
 }

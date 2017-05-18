@@ -54,4 +54,8 @@ export class PlayerViewComponent implements OnInit, OnDestroy {
   finishEdit() {
     this.editing = false;
   }
+
+  deletePlayer() {
+    this.db.deletePlayer(this.currentPlayer);
+  }
 }
