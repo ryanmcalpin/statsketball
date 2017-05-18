@@ -3,6 +3,7 @@ import { DbService } from '../db.service'
 import 'rxjs/add/operator/takeUntil';
 import { Subject } from 'rxjs/Subject';
 import { Team } from '../team.model';
+import { AuthenticateService } from '../authenticate.service';
 
 @Component({
   selector: 'app-team-list',
@@ -12,10 +13,12 @@ import { Team } from '../team.model';
 export class TeamListComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   adminLoggedIn: boolean = true; // TODO change this
+  user: any = null;
 
   teams: any[];
   players: any[];
-  constructor(public db: DbService) { }
+  constructor(public db: DbService,
+              private authService: AuthenticateService) { }
 
   ngOnInit() {
     this.db.getTeams()
@@ -26,6 +29,9 @@ export class TeamListComponent implements OnInit, OnDestroy {
             this.players = results;
           });
       });
+    this.authService.getCurrentUser()
+    .takeUntil(this.ngUnsubscribe).subscribe(userInfo => {
+      this.user = userInfo});
   }
 
   ngOnDestroy() {
