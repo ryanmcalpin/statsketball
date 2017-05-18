@@ -60,7 +60,11 @@ export class PlayerViewComponent implements OnInit, OnDestroy {
   }
 
   clickEdit() {
-    this.editing = true;
+    if (this.editing) {
+      this.editing = false;
+    } else {
+      this.editing = true;
+    }
   }
 
   finishEdit() {
