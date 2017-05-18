@@ -15,12 +15,12 @@
         <ul class="collection">
           <li class="collection-item" *ngFor="let player of players">
             <a routerLink="/teams/{{team.$key}}/players/{{player.$key}}">
-              <div class="game-list-container">
-                <span class="game-list-item">#{{player.jerseyNumber}}</span>
-                <span class="game-list-item">{{player.position}}</span>
-                <span class="game-list-item">{{player.name}} | </span>
-                <span class="game-list-item">{{db.convertInchesToFeetAndInches(player.height).ft}} {{db.convertInchesToFeetAndInches(player.height).in}},</span>
-                <span class="game-list-item">{{player.weight}} lbs.</span>
+              <div class="flex-box-parent">
+                <span class="fb-10">#{{player.jerseyNumber}}</span>
+                <span class="fb-10">{{player.position}}</span>
+                <span class="fb-auto">{{player.name}}</span>
+                <span class="fb-10">{{db.convertInchesToFeetAndInches(player.height).ft}} {{db.convertInchesToFeetAndInches(player.height).in}}</span>
+                <span class="fb-10">{{player.weight}} lbs.</span>
               </div>
             </a>
           </li>
@@ -87,11 +87,11 @@
         <ul class="collection">
           <li class="collection-item" *ngFor="let game of games">
             <a routerLink="/teams/{{team.$key}}/games/{{game.$key}}/stats">
-              <div class="game-list-container">
-                <span class="game-list-item" id="three">{{game.date}}</span>
-                <span class="game-list-item" id="one">vs {{game.opponent}},</span>
+              <div class="flex-box-parent">
+                <span class="fb-20">{{game.date}}</span>
+                <span class="fb-auto">vs {{game.opponent}}</span>
                 <!-- <span class="game-list-item" id="two">Season: {{game.season}}</span> -->
-                <span class="game-list-item" id="four">{{game.location}}</span>
+                <span class="fb-30">{{game.location}}</span>
               </div>
             </a>
           </li>
