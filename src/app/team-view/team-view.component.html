@@ -4,7 +4,7 @@
       <div class="card-content">
         <a *ngIf="userAssociatedWithTeam?.$key === user?.uid" class="waves-effect waves-light btn modal-trigger right" (click)="openModal()">New Game</a>
         <div *ngIf="!editing">
-          <span class="card-title">{{team?.name}} <i (click)="clickEdit()" class="tiny material-icons clickable">mode_edit</i></span>
+          <span class="card-title">{{team?.name}} <i *ngIf="userAssociatedWithTeam?.$key === user?.uid" (click)="clickEdit()" class="tiny material-icons clickable">mode_edit</i></span>
           <p>Location: {{team?.location}}</p>
           <p>Coach: {{team?.coachName}}</p>
           <p>Managed on Statsketball by: {{userAssociatedWithTeam?.name}}</p>
