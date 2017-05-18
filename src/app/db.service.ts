@@ -224,4 +224,8 @@ export class DbService {
   updateTeam(teamId: string, team: any) {
     this.teams.update(teamId, team);
   }
+
+  updatePlayer(playerId: string, player: any) {
+    this.db.list('/players').update(playerId, player);
+  }
 }

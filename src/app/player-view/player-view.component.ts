@@ -20,6 +20,7 @@ export class PlayerViewComponent implements OnInit, OnDestroy {
   gamesThisPlayerPlayed;
   teamId: string;
   playerId: string;
+  editing: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private db: DbService) { }
@@ -38,5 +39,13 @@ export class PlayerViewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  clickEdit() {
+    this.editing = true;
+  }
+
+  finishEdit() {
+    this.editing = false;
   }
 }

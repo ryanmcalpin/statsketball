@@ -3,25 +3,28 @@
     <div class="card" *ngIf="currentPlayer">
       <div class="card-image">
         <img src="https://yarncommunity.org/images/empty.png" alt="person-placeholder" />
-        <span class="card-title black">{{currentPlayer.name}}</span>
+        <span class="card-title black">{{currentPlayer.name}} <i *ngIf="userAssociatedWithTeam?.$key === user?.uid" (click)="clickEdit()" class="small material-icons clickable">mode_edit</i></span>
       </div>
       <div class="card-content">
         <p>Age: {{db.calculateAge(currentPlayer.birthdate)}}</p>
         <p>Height: {{db.convertInchesToFeetAndInches(currentPlayer.height).ft}} {{db.convertInchesToFeetAndInches(currentPlayer.height).in}}</p>
         <p>Position: {{db.getLongPosition(currentPlayer.position)}}</p>
         <p>Weight: {{currentPlayer.weight}} lbs.</p>
-        <p>Games played:</p>
-        <ul class="collection">
-          <li class="collection-item" *ngFor="let game of gamesThisPlayerPlayed">
-            <a routerLink='/teams/{{currentPlayer.teamId}}/games/{{game.$key}}/stats'>
-              <span>{{game.season}} | </span>
-              <span>{{game.date}} | </span>
-              <span>{{game.location}} | </span>
-              <span>{{game.opponent}}</span>
-            </a>
-          </li>
-        </ul>
+        <div *ngIf="!editing">
+          <p>Games played:</p>
+          <ul class="collection">
+            <li class="collection-item" *ngFor="let game of gamesThisPlayerPlayed">
+              <a routerLink='/teams/{{currentPlayer.teamId}}/games/{{game.$key}}/stats'>
+                <span>{{game.season}} | </span>
+                <span>{{game.date}} | </span>
+                <span>{{game.location}} | </span>
+                <span>{{game.opponent}}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
+    <app-edit-player *ngIf="editing" [player]="currentPlayer" [playerId]="playerId"></app-edit-player>
   </div>
 </div>
