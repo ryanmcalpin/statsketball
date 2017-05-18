@@ -80,6 +80,10 @@ export class TeamViewComponent implements OnInit, OnDestroy {
 
   removePlayer(index: number) {
     this.playersF.removeAt(index);
+    if (this.playersF.length===0) {
+      this.togglePlayerForm();
+      this.addPlayer();
+    }
   }
 
   savePlayers(){
@@ -110,7 +114,7 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   }
 
   clickEdit() {
-    this.editing = true;
+    this.editing = !this.editing;
   }
 
   finishEdit() {
@@ -119,7 +123,7 @@ export class TeamViewComponent implements OnInit, OnDestroy {
 
   deleteTeam() {
     if (confirm("Are you sure you want to delete this team and all of its players and games?")) {
-      // this.db.deleteTeam(this.team);
+      this.db.deleteTeam(this.team);
     }
   }
 
