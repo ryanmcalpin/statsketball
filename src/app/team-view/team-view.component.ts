@@ -28,6 +28,7 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   user: any = null;
   userAssociatedWithTeam: any = null;
   editing: boolean = false;
+  showPlayerForm: boolean = false;
 
 
   newGameModal = new EventEmitter<string|MaterializeAction>();
@@ -58,6 +59,7 @@ export class TeamViewComponent implements OnInit, OnDestroy {
       playersF: this.fb.array([]),
     });
     this.positions = this.db.getPositions();
+    this.addPlayer();
   }
 
   get playersF(): FormArray {
@@ -116,7 +118,13 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   }
 
   deleteTeam() {
-    this.db.deleteTeam(this.team);
+    if (confirm("Are you sure you want to delete this team and all of its players and games?")) {
+      // this.db.deleteTeam(this.team);
+    }
+  }
+
+  togglePlayerForm() {
+    this.showPlayerForm = !this.showPlayerForm;
   }
 
 }
