@@ -238,6 +238,7 @@ export class DbService {
     var updates = {};
     Object.keys(team.players).forEach(player => {
       updates['/players/'+ player + '/gamesPlayed/'+ gameId] = true;
+      updates['/games/'+ gameId + '/players/' + player] = true;
     })
     firebase.database().ref().update(updates);
     return gameId;
@@ -266,7 +267,14 @@ export class DbService {
     firebase.database().ref().update(updates);
   }
 
-  deleteGame(gameId: string) {
-
+  deleteGame(game: any) {
+    var updates = {};
+    Object.keys(game.players).forEach(playerId => {
+      updates['/players/' + playerId + '/gamesPlayed/' + game.$key] = null;
+    });
+    updates['/singleGamePlayerStats/' + game.$key] = null;
+    updates['/teams/' + game.teamId + '/games/' + game.$key] = null;
+    updates['/games/' + game.$key] = null;
+    firebase.database().ref().update(updates);
   }
 }
