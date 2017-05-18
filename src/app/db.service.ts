@@ -32,25 +32,26 @@ export class DbService {
 
   createTeam(team: Team, players: Player[], currentUserId: string) {
     var teamId = this.teams.push(team).key;
-
-    players.forEach(player => {
-      var playerId = firebase.database().ref('/players').push().key;
-      var updates = {}
-      updates['/teams/'+teamId+'/players/'+playerId] = true;
-      updates['/teams/' + teamId + '/user/' + currentUserId] = true;
-      updates['/users/' + currentUserId + '/teams/' + teamId] = true;
-      updates['/players/'+playerId] = {
-        name: player.name,
-        position: player.position,
-        height: player.height,
-        weight: player.weight,
-        birthdate: (new Date(player.birthdate).toJSON()),
-        jerseyNumber: player.jerseyNumber,
-        teamId: teamId,
-        imageURL: player.imageURL
-      };
-      firebase.database().ref().update(updates);
-    })
+    var updates = {}
+    updates['/teams/' + teamId + '/user/' + currentUserId] = true;
+    updates['/users/' + currentUserId + '/teams/' + teamId] = true;
+    if (players) {
+      players.forEach(player => {
+        var playerId = firebase.database().ref('/players').push().key;
+        updates['/teams/'+teamId+'/players/'+playerId] = true;
+        updates['/players/'+playerId] = {
+          name: player.name,
+          position: player.position,
+          height: player.height,
+          weight: player.weight,
+          birthdate: (new Date(player.birthdate).toJSON()),
+          jerseyNumber: player.jerseyNumber,
+          teamId: teamId,
+          imageURL: player.imageURL
+        };
+      })
+    }
+    firebase.database().ref().update(updates);
     return teamId;
   }
 

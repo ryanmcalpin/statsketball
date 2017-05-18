@@ -34,6 +34,7 @@ export class NewTeamComponent implements OnInit {
     this.authService.getCurrentUser().subscribe(results=>{
       this.currentUserId = results.uid;
     });
+
   }
 
   get players(): FormArray {

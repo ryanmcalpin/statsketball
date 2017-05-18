@@ -27,7 +27,7 @@ export class EditPlayerComponent implements OnInit {
       weight: [this.player.weight, Validators.required],
       birthdate: [this.player.birthdate, Validators.required],
       jerseyNumber: [this.player.jerseyNumber, Validators.required],
-      imageURL: [this.player.imageURL, [Validators.required, this.forbiddenNameValidator(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)]]
+      imageURL: [this.player.imageURL]
     });
     this.positions = this.db.getPositions();
   }

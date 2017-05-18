@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import 'rxjs/add/operator/takeUntil';
 import { Subject } from 'rxjs/Subject';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Team } from '../team.model';
 import { Player } from '../player.model';
@@ -36,7 +36,8 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
               private db: DbService,
               private fb: FormBuilder,
-              private authService: AuthenticateService) { }
+              private authService: AuthenticateService,
+              private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -93,7 +94,7 @@ export class TeamViewComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe).subscribe(user=> this.user = user);
     this.newPlayerForm.reset();
     for (var i=0; i<playersF.length; i++) {
-      this.removePlayer(i);
+      this.removePlayer(0);
     }
   }
 
@@ -124,6 +125,7 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   deleteTeam() {
     if (confirm("Are you sure you want to delete this team and all of its players and games?")) {
       this.db.deleteTeam(this.team);
+      this.router.navigate(['']);
     }
   }
 
