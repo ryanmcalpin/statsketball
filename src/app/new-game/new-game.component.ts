@@ -21,7 +21,7 @@ export class NewGameComponent implements OnInit {
   ngOnInit() {
     this.newGameForm = this.fb.group({
       opponent: ['', Validators.required],
-      season: ['', Validators.required],
+      season: ['2016-17', Validators.required],
       location: ['', Validators.required],
       date: ['', Validators.required]
     });

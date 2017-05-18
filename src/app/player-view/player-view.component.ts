@@ -8,6 +8,8 @@ import { Player } from '../player.model';
 import { Game } from '../game.model';
 import { DbService } from '../db.service';
 import { MaterializeAction } from 'angular2-materialize';
+import { AuthenticateService } from '../authenticate.service';
+
 
 @Component({
   selector: 'app-player-view',
@@ -22,9 +24,12 @@ export class PlayerViewComponent implements OnInit, OnDestroy {
   playerId: string;
   editing: boolean = false;
   gameStats: any;
+  user: any = null;
+  userAssociatedWithTeam: any = null;
 
   constructor(private route: ActivatedRoute,
-              private db: DbService) { }
+              private db: DbService,
+              private authService: AuthenticateService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -39,6 +44,13 @@ export class PlayerViewComponent implements OnInit, OnDestroy {
           console.log(stats);
           this.gameStats = stats;
         });
+      this.authService.getCurrentUser()
+      .takeUntil(this.ngUnsubscribe).subscribe(userInfo => {
+        this.user = userInfo});
+      this.db.getUserIdAssociatedWithTeam(this.teamId)
+      .takeUntil(this.ngUnsubscribe).subscribe(userId =>{
+          this.db.getUserById(Object.keys(userId)[0]).takeUntil(this.ngUnsubscribe).subscribe(userInfo => this.userAssociatedWithTeam = userInfo);
+      });
     });
   }
 
@@ -48,7 +60,11 @@ export class PlayerViewComponent implements OnInit, OnDestroy {
   }
 
   clickEdit() {
-    this.editing = true;
+    if (this.editing) {
+      this.editing = false;
+    } else {
+      this.editing = true;
+    }
   }
 
   finishEdit() {

@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <app-edit-player *ngIf="editing" [player]="currentPlayer" [playerId]="playerId"></app-edit-player>
+    <app-edit-player *ngIf="editing" [player]="currentPlayer" [playerId]="playerId" (finishSender)="finishEdit()"></app-edit-player>
   </div>
 </div>
 <div class="row">
