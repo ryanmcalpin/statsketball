@@ -28,3 +28,43 @@
     <app-edit-player *ngIf="editing" [player]="currentPlayer" [playerId]="playerId"></app-edit-player>
   </div>
 </div>
+
+<div class="row">
+  <div class="col s12 m10 offset-m1">
+    <div class="card" *ngIf="gameStats">
+      <div class="card-content">
+        <span class="card-title">{{currentPlayer?.name}} Game Averages</span>
+        <table>
+          <thead>
+            <tr>
+              <th>Games</th>
+              <th>MP</th>
+              <th>PTS</th>
+              <th>FG %</th>
+              <th>3P %</th>
+              <th>FT %</th>
+              <th>TRB</th>
+              <th>AST</th>
+              <th>BLK</th>
+              <th>STL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{gameStats.gameCount}}</td>
+              <td>{{gameStats.minutes / gameStats.gameCount}}</td>
+              <td>{{((gameStats.twoMade * 2) + (gameStats.threeMade * 3) + gameStats.freeMade)/gameStats.gameCount | number:'1.2-2'}}</td>
+              <td>{{((gameStats.twoMade + gameStats.threeMade)/(gameStats.twoAttempt + gameStats.threeAttempt) || '0') | number:'1.2-2'}}</td>
+              <td>{{((gameStats.threeMade/gameStats.threeAttempt) || '0') | number:'1.2-2'}}</td>
+              <td>{{((gameStats.freeMade/gameStats.freeAttempt) || '0') | number:'1.2-2'}}</td>
+              <td>{{(gameStats.offRebounds + gameStats.defRebounds)}}</td>
+              <td>{{gameStats.assists}}</td>
+              <td>{{gameStats.blocks}}</td>
+              <td>{{gameStats.steals}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
