@@ -3,10 +3,18 @@
     <div class="card" *ngIf="currentPlayer">
       <div class="card-image">
         <img src="{{currentPlayer?.imageURL || 'https://yarncommunity.org/images/empty.png'}}" alt="person-placeholder" />
-        <span class="card-title black">{{currentPlayer.name}} <i *ngIf="userAssociatedWithTeam?.$key === user?.uid" (click)="clickEdit()" class="small material-icons clickable">mode_edit</i></span>
+        <span class="card-title black">{{currentPlayer.name}}</span>
       </div>
       <div class="card-content">
-        <button (click)="deletePlayer()">delete</button>
+        <div *ngIf="userAssociatedWithTeam?.$key === user?.uid" class="fixed-action-btn horizontal butticon">
+          <a class="btn-floating btn-large red darken-3">
+            <i class="small material-icons">mode_edit</i>
+          </a>
+          <ul>
+            <li><a materialize="tooltip" (click)="deletePlayer()" class="btn-floating red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete"><i class="material-icons">delete</i></a></li>
+            <li><a materialize="tooltip" (click)="clickEdit()" class="btn-floating blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit"><i class="material-icons">mode_edit</i></a></li>
+          </ul>
+        </div>
         <p>Jersey Number: {{currentPlayer?.jerseyNumber}}</p>
         <p>Age: {{db.calculateAge(currentPlayer.birthdate)}}</p>
         <p>Height: {{db.convertInchesToFeetAndInches(currentPlayer.height).ft}} {{db.convertInchesToFeetAndInches(currentPlayer.height).in}}</p>
