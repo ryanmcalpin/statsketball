@@ -97,7 +97,11 @@ export class TeamViewComponent implements OnInit, OnDestroy {
   }
 
   openModal() {
-    this.newGameModal.emit({action:"modal",params:['open']});
+    if (this.players.length<5) {
+      alert("You need at least 5 players to play a game!");
+    } else {
+      this.newGameModal.emit({action:"modal",params:['open']});
+    }
   }
   closeModal() {
     this.newGameModal.emit({action:"modal",params:['close']});
@@ -109,6 +113,10 @@ export class TeamViewComponent implements OnInit, OnDestroy {
 
   finishEdit() {
     this.editing = false;
+  }
+
+  deleteTeam() {
+    this.db.deleteTeam(this.team);
   }
 
 }

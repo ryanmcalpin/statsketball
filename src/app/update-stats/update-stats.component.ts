@@ -67,5 +67,8 @@ export class UpdateStatsComponent implements OnInit, OnDestroy {
     return item.$key;
   }
 
+  deleteGame() {
+    this.db.deleteGame(this.gameId);
+  }
 
 }

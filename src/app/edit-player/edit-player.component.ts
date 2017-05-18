@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DbService } from '../db.service';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
 import { MaterializeAction } from 'angular2-materialize';
@@ -12,6 +12,7 @@ import { Player } from '../player.model';
 export class EditPlayerComponent implements OnInit {
   @Input() player;
   @Input() playerId;
+  @Output() finishSender = new EventEmitter();
   editPlayerForm: FormGroup;
   positions: any[];
 
@@ -43,6 +44,7 @@ export class EditPlayerComponent implements OnInit {
     var {name, position, height, weight, birthdate, jerseyNumber, imageURL} = this.editPlayerForm.value;
     var editedPlayer = new Player(name, position, jerseyNumber, height, weight, birthdate, imageURL);
     this.db.updatePlayer(this.playerId, editedPlayer);
+    this.finishSender.emit();
   }
 
   isValidURL(query: string){

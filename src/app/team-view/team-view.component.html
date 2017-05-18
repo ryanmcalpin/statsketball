@@ -10,14 +10,16 @@
           <p>Managed on Statsketball by: {{userAssociatedWithTeam?.name}}</p>
         </div>
         <app-edit-team *ngIf="editing" [teamId]="teamId" [team]="team" (finishSender)="finishEdit()"></app-edit-team>
+        <button (click)="deleteTeam()">delete</button>
         <p>Players: </p>
         <ul class="collection">
           <li class="collection-item" *ngFor="let player of players">
             <a routerLink="/teams/{{team.$key}}/players/{{player.$key}}">
               <div class="game-list-container">
-                <span class="game-list-item">{{player.name}}</span>
+                <span class="game-list-item">#{{player.jerseyNumber}}</span>
                 <span class="game-list-item">{{player.position}}</span>
-                <span class="game-list-item">{{db.convertInchesToFeetAndInches(player.height).ft}} {{db.convertInchesToFeetAndInches(player.height).in}}</span>
+                <span class="game-list-item">{{player.name}} | </span>
+                <span class="game-list-item">{{db.convertInchesToFeetAndInches(player.height).ft}} {{db.convertInchesToFeetAndInches(player.height).in}},</span>
                 <span class="game-list-item">{{player.weight}} lbs.</span>
               </div>
             </a>
@@ -58,7 +60,7 @@
                     <label for="player-birthdate">Player #{{i + 1}} Birthdate</label>
                   </div>
                   <div class="input-field col s3">
-                    <input type="number" id="player-number" formControlName="jerseyNumber" required>
+                    <input type="number" id="player-number" formControlName="jerseyNumber" pattern="^[0-9]{1,2}$" required>
                     <label for="player-number">Player #{{i + 1}} Jersey Number</label>
                   </div>
                 </div>
@@ -86,10 +88,10 @@
           <li class="collection-item" *ngFor="let game of games">
             <a routerLink="/teams/{{team.$key}}/games/{{game.$key}}/stats">
               <div class="game-list-container">
-                <span class="game-list-item" id="one">vs. {{game.opponent}}</span>
-                <span class="game-list-item" id="two">Season: {{game.season}}</span>
                 <span class="game-list-item" id="three">{{game.date}}</span>
-                <span class="game-list-item" id="four">in {{game.location}}</span>
+                <span class="game-list-item" id="one">vs {{game.opponent}},</span>
+                <!-- <span class="game-list-item" id="two">Season: {{game.season}}</span> -->
+                <span class="game-list-item" id="four">{{game.location}}</span>
               </div>
             </a>
           </li>
