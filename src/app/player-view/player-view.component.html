@@ -17,9 +17,9 @@
             <li class="collection-item" *ngFor="let game of gamesThisPlayerPlayed">
               <a routerLink='/teams/{{currentPlayer.teamId}}/games/{{game.$key}}/stats'>
                 <div class="game-list-container">
-                  <span class="game-list-item">{{game.season}} | </span>
-                  <span class="game-list-item">{{game.date}} | </span>
-                  <span class="game-list-item">{{game.location}} | </span>
+                  <span class="game-list-item">{{game.season}}</span>
+                  <span class="game-list-item">{{game.date}}</span>
+                  <span class="game-list-item">{{game.location}}</span>
                   <span class="game-list-item">{{game.opponent}}</span>
                 </div>
               </a>
@@ -36,7 +36,7 @@
     <div class="card" *ngIf="gameStats">
       <div class="card-content">
         <span class="card-title">{{currentPlayer?.name}} Game Averages</span>
-        <table>
+        <table *ngIf="gameStats.gameCount > 0">
           <thead>
             <tr>
               <th>Games</th>
@@ -54,8 +54,8 @@
           <tbody>
             <tr>
               <td>{{gameStats.gameCount}}</td>
-              <td>{{gameStats.minutes / gameStats.gameCount}}</td>
-              <td>{{((gameStats.twoMade * 2) + (gameStats.threeMade * 3) + gameStats.freeMade)/gameStats.gameCount | number:'1.2-2'}}</td>
+              <td>{{(gameStats.minutes / gameStats.gameCount) || '0'}}</td>
+              <td>{{(((gameStats.twoMade * 2) + (gameStats.threeMade * 3) + gameStats.freeMade)/gameStats.gameCount) || '0' | number:'1.2-2'}}</td>
               <td>{{((gameStats.twoMade + gameStats.threeMade)/(gameStats.twoAttempt + gameStats.threeAttempt) || '0') | number:'1.2-2'}}</td>
               <td>{{((gameStats.threeMade/gameStats.threeAttempt) || '0') | number:'1.2-2'}}</td>
               <td>{{((gameStats.freeMade/gameStats.freeAttempt) || '0') | number:'1.2-2'}}</td>
@@ -66,6 +66,7 @@
             </tr>
           </tbody>
         </table>
+        <p *ngIf="gameStats.gameCount === 0">This player has not played any games.</p>
       </div>
     </div>
   </div>
