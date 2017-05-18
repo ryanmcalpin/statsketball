@@ -238,6 +238,7 @@ export class DbService {
     var updates = {};
     Object.keys(team.players).forEach(player => {
       updates['/players/'+ player + '/gamesPlayed/'+ gameId] = true;
+      updates['/games/'+ gameId + '/players/' + player] = true;
     })
     firebase.database().ref().update(updates);
     return gameId;
@@ -249,5 +250,55 @@ export class DbService {
 
   updatePlayer(playerId: string, player: any) {
     this.db.list('/players').update(playerId, player);
+  }
+
+
+  deleteTeam(team: any) {
+    if (team.players) {
+      Object.keys(team.players).forEach(playerId => {
+        this.deletePlayer(playerId);
+      });
+    };
+    if (team.games) {
+      Object.keys(team.games).forEach(gameId => {
+        this.deleteGame(gameId);
+      });
+    };
+    var userId = Object.keys(team.user)[0];
+    var updates = {};
+    updates['/users/' + userId + '/teams/' + team.$key] = null;
+    updates['/teams/' + team.$key] = null;
+    firebase.database().ref().update(updates);
+  }
+
+  deletePlayer(playerId: string) {
+    this.getPlayerByIdOnce(playerId).then(playerVal => {
+      var player = playerVal.val();
+      var updates = {};
+      updates['/teams/' + player.teamId + '/players/' + playerId] = null;
+      if (player.gamesPlayed) {
+        Object.keys(player.gamesPlayed).forEach(gameId => {
+          updates['/singleGamePlayerStats/' + gameId + '/' + playerId] = null;
+        });
+      }
+      updates['/players/' + playerId] = null;
+      firebase.database().ref().update(updates);
+    })
+  }
+
+  deleteGame(gameId: string) {
+    this.getGameByIdOnce(gameId).then(gameVal => {
+      var game = gameVal.val();
+      var updates = {};
+      if (game.players) {
+        Object.keys(game.players).forEach(playerId => {
+          updates['/players/' + playerId + '/gamesPlayed/' + gameId] = null;
+        });
+      }
+      updates['/singleGamePlayerStats/' + gameId] = null;
+      updates['/teams/' + game.teamId + '/games/' + gameId] = null;
+      updates['/games/' + gameId] = null;
+      firebase.database().ref().update(updates);
+    })
   }
 }

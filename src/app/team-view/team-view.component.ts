@@ -115,4 +115,8 @@ export class TeamViewComponent implements OnInit, OnDestroy {
     this.editing = false;
   }
 
+  deleteTeam() {
+    this.db.deleteTeam(this.team);
+  }
+
 }
