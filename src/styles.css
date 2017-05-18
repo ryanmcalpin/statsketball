@@ -2,3 +2,11 @@
 .breadcrumb, .clickable:hover {
   cursor: pointer;
 }
+
+.butticon {
+  position: absolute !important;
+  display: inline-block;
+  right: 20px;
+  top: 20px;
+  height: 60px;
+}
