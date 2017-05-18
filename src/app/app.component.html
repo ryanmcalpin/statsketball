@@ -12,18 +12,20 @@
             <li><img routerLink="" src="http://pngimg.com/uploads/basketball/basketball_PNG1096.png" alt="" id="basketball-icon"></li>
           </ul>
         </div>
-        <ul id="slide-out" class="side-nav">
+        <ul id="slide-out" class="side-nav team-nav-bar-section">
           <li><div class="userView">
-            <div class="background">
-              <img src="https://media.licdn.com/mpr/mpr/p/1/005/0a3/3c9/203d1eb.jpg">
-            </div>
+            <div class="background black"></div>
             <a><img class="circle" src="{{userObjFromDb?.photoURL}}"></a>
             <a><span class="white-text name">{{userObjFromDb?.name}}</span></a>
             <a><span class="white-text email">{{userObjFromDb?.email}}</span></a>
+            <a (click)="logoutComponent()"><span class="white-text email">Log Out</span></a>
           </div></li>
-          <li><div class="divider"></div></li>
-          <li><a (click)="switchUser()">Switch User</a></li>
-          <li><a (click)="logoutComponent()">Log Out</a></li>
+          <div class="team-nav-bar-section">
+            <li><div class="divider"></div></li>
+            <li><a class="subheader"><h5 class="grey-text"><strong>My Teams</strong></h5></a></li>
+            <li *ngFor="let team of teams"><a routerLink="/teams/{{team.$key}}" class="white-text">{{team.name}}</a></li>
+            <li><a routerLink='/teams/new' class="white-text">Create a new team</a></li>
+          </div>
         </ul>
       </div>
     </nav>

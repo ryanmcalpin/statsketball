@@ -36,7 +36,6 @@ export class PlayerViewComponent implements OnInit, OnDestroy {
         .takeUntil(this.ngUnsubscribe).subscribe(games => this.gamesThisPlayerPlayed = games);
       this.db.getPlayerAllGameStats(this.playerId).takeUntil(this.ngUnsubscribe)
         .subscribe(stats => {
-          console.log(stats);
           this.gameStats = stats;
         });
     });

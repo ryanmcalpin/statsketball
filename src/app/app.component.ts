@@ -18,6 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
   routeSections;
   user: any = null;
   userObjFromDb;
+  teams = null;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(private router: Router, private authService: AuthenticateService, private db:DbService ){}
@@ -34,8 +35,13 @@ export class AppComponent implements OnInit, OnDestroy {
         .takeUntil(this.ngUnsubscribe).subscribe(dbuser=>{
           this.userObjFromDb = dbuser;
         });
+        this.db.getTeamsAssociatedWithUser(this.user.uid)
+        .takeUntil(this.ngUnsubscribe).subscribe(teams=>{
+          this.teams = teams;
+        });
       }
     });
+
   }
 
   ngOnDestroy(){

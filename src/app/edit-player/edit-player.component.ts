@@ -19,7 +19,6 @@ export class EditPlayerComponent implements OnInit {
               private fb: FormBuilder) { }
 
   ngOnInit() {
-    console.log(this.player);
     this.editPlayerForm = this.fb.group({
       name: [this.player.name, Validators.required],
       position: [this.player.position, Validators.required],
@@ -36,6 +35,14 @@ export class EditPlayerComponent implements OnInit {
     var {name, position, height, weight, birthdate, jerseyNumber, imageURL} = this.editPlayerForm.value;
     var editedPlayer = new Player(name, position, jerseyNumber, height, weight, birthdate, imageURL);
     this.db.updatePlayer(this.playerId, editedPlayer);
+  }
+
+  isValidURL(query: string){
+    // isValidURL(editPlayerForm.value.imageURL) in button
+    var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+    var regex = new RegExp(expression);
+    console.log(regex.test(query));
+    return regex.test(query);
   }
 
 }

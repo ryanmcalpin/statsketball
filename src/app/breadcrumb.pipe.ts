@@ -26,8 +26,6 @@ export class BreadcrumbPipe implements PipeTransform {
           resolve(value.val().name);
         })
       } else {
-        // resolve(crumb[index]);
-        console.log("Not making a breacrumb for " + crumb[index]);
       }
     })
   }
