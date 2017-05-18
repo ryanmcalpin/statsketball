@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DbService } from '../db.service';
-import { FormBuilder, FormGroup, FormControl, FormArray, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormArray, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
 import { MaterializeAction } from 'angular2-materialize';
 import { Player } from '../player.model';
 
@@ -26,9 +26,17 @@ export class EditPlayerComponent implements OnInit {
       weight: [this.player.weight, Validators.required],
       birthdate: [this.player.birthdate, Validators.required],
       jerseyNumber: [this.player.jerseyNumber, Validators.required],
-      imageURL: [this.player.imageURL, Validators.required]
+      imageURL: [this.player.imageURL, [Validators.required, this.forbiddenNameValidator(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)]]
     });
     this.positions = this.db.getPositions();
+  }
+
+  forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
+      return (control: AbstractControl): {[key: string]: any} => {
+      const name = control.value;
+      const no = nameRe.test(name);
+      return no ? {'forbiddenName': {name}} : null;
+    };
   }
 
   clickFinish() {
