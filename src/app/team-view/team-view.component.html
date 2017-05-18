@@ -58,7 +58,7 @@
                     <label for="player-birthdate">Player #{{i + 1}} Birthdate</label>
                   </div>
                   <div class="input-field col s3">
-                    <input type="number" id="player-number" formControlName="jerseyNumber" required>
+                    <input type="number" id="player-number" formControlName="jerseyNumber" pattern="^[0-9]{1,2}$" required>
                     <label for="player-number">Player #{{i + 1}} Jersey Number</label>
                   </div>
                 </div>

@@ -35,20 +35,20 @@
           </div>
         </div>
         <div class="row">
-          <div class="input-field col s4">
+          <div class="input-field col s3">
             <input type="number" id="player-height" formControlName="height" required>
             <label for="player-height">Player #{{i + 1}} Height</label>
           </div>
-          <div class="input-field col s4">
+          <div class="input-field col s3">
             <input type="number" id="player-weight" formControlName="weight" required>
             <label for="player-weight">Player #{{i + 1}} Weight</label>
           </div>
-          <div class="input-field col s2">
+          <div class="input-field col s3">
             <input type="date" id="player-birthdate" class="datepicker" materialize="pickadate" [materializeParams]="[{selectYears: 20}]" formControlName="birthdate" required>
             <label for="player-birthdate">Player #{{i + 1}} Birthdate</label>
           </div>
-          <div class="input-field col s2">
-            <input type="number" id="player-number" formControlName="jerseyNumber" required>
+          <div class="input-field col s3">
+            <input type="number" id="player-number" formControlName="jerseyNumber" pattern="^[0-9]{1,2}$" required>
             <label for="player-number">Player #{{i + 1}} Jersey Number</label>
           </div>
         </div>
