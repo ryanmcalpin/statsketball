@@ -28,6 +28,7 @@ A webapp made using the Angular2 javaScript framework that allows users (e.g., a
     storageBucket: "xxxx.appspot.com",
     messagingSenderId: "xxxx"
   };```
+  
   to api-keys.ts, replacing values with those from Firebase
 * Run 'ng serve'
 * Navigate to localhost:4200 in browser
