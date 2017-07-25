@@ -5,6 +5,8 @@ Epicodus, May 15-18, 2017
 ## Description
 A webapp made using the Angular2 javaScript framework that allows users (e.g., a coach of a high school basketball team) to log in via their google accounts and then create teams, players, and games, and track their statistics. Statsketball also allows users (when not logged in) to view other users' teams and statistics, but not edit them.
 
+![screenshot](/../screenshots/screenshots/screenshot-home.png?raw=true "screenshot")
+
 ## Requirements
 * Git
 * Node.js (with npm)
