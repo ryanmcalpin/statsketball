@@ -24,6 +24,7 @@ A webapp made using the Angular2 javaScript framework that allows users (e.g., a
   ```export var masterFirebaseConfig = {
     apiKey: "xxxx",
     authDomain: "xxxx.firebaseapp.com",
+    projectId: "xxxx"
     databaseURL: "https://xxxx.firebaseio.com",
     storageBucket: "xxxx.appspot.com",
     messagingSenderId: "xxxx"
