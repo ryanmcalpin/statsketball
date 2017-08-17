@@ -30,7 +30,8 @@ A webapp made using the Angular2 javaScript framework that allows users (e.g., a
 * Create a file called 'api-keys.ts' in statsketball/src/app
 * Create a Firebase project and select 'Add Firebase to your web app'
 * Add 
-  ```export var masterFirebaseConfig = {
+  ```
+  export var masterFirebaseConfig = {
     apiKey: "xxxx",
     authDomain: "xxxx.firebaseapp.com",
     projectId: "xxxx"
