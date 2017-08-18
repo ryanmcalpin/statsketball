@@ -4,11 +4,14 @@
   min-height: 650px;
 }
 
-.card {
-  margin-bottom: 0;
-  height: 100%;
-}
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 
-.body {
-  margin-bottom: 0;
+  .card {
+    margin-bottom: 0;
+    height: 100%;
+  }
+
+  .body {
+    margin-bottom: 0;
+  }
 }
