@@ -3,3 +3,15 @@
   height: 70vh;
   min-height: 650px;
 }
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+  .card {
+    margin-bottom: 0;
+    height: 100%;
+  }
+
+  .body {
+    margin-bottom: 0;
+  }
+}
