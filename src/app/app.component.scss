@@ -1,5 +1,8 @@
 #basketball-icon {
   height: 73px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .game-list-container {
