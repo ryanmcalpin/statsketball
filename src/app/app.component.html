@@ -27,7 +27,7 @@
             <li *ngFor="let team of teams"><a routerLink="/teams/{{team.$key}}" class="white-text">{{team.name}}</a></li>
           </div>
           <div *ngIf="!user">
-            <a (click)="loginGoogleComponent()">Log in with Google</a>
+            <a id="drawer-login" (click)="loginGoogleComponent()">Log in with Google</a>
           </div>
         </ul>
       </div>

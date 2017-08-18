@@ -1,21 +1,29 @@
-#basketball-icon{
+#basketball-icon {
   height: 73px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
-.game-list-container{
+.game-list-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-.game-list-item{
+.game-list-item {
   flex-basis: 25%;
 }
 
-.team-nav-bar-section{
+.team-nav-bar-section {
   background-image: url("http://wallpapercave.com/wp/pdUdA3Q.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
+}
+
+#drawer-login {
+  margin: 56px 32px 0;
+  text-align: center;
 }
