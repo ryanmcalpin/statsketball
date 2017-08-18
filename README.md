@@ -1,6 +1,6 @@
 # Statsketball
 Ryan McAlpin, Janek Brandt, Mark Fisher
-Epicodus, May 15-18, 2017
+<br>Epicodus, May 15-18, 2017
 
 ##### Live Version: https://statsketball-27ff5.firebaseapp.com/
 
@@ -47,5 +47,5 @@ A webapp made using the Angular2 javaScript framework that allows users (e.g., a
 * Navigate to localhost:4200 in browser
 
 ## Legal
-Copyright (c) 2017 Copyright Ryan McAlpin, Janek Brandt, & Mark Fisher, All Rights Reserved.<br/>
+Copyright (c) 2017 Copyright Ryan McAlpin, Janek Brandt, & Mark Fisher, All Rights Reserved.<br>
 This webpage is licensed under the MIT license.
