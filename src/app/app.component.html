@@ -2,7 +2,7 @@
   <header>
     <nav>
       <div class="nav-wrapper blue-grey darken-1">
-        <a *ngIf="user" href="#" data-activates="slide-out" class="button-collapse show-on-large" materialize="sideNav" [materializeParams]="[{closeOnClick: true}]"><i class="material-icons">menu</i></a>
+        <a href="#" data-activates="slide-out" class="button-collapse show-on-large" materialize="sideNav" [materializeParams]="[{closeOnClick: true}]"><i class="material-icons">menu</i></a>
         <div class="col s12">
           <a routerLink="" class="breadcrumb">Home</a>
           <a *ngFor="let placeholder of routeSections; let i = index" (click)="navigateToSubURL(routeSections, i)" class="breadcrumb">{{routeSections| breadcrumb:i|async|titlecase}}</a>
@@ -13,18 +13,21 @@
           </ul>
         </div>
         <ul id="slide-out" class="side-nav team-nav-bar-section">
-          <li><div class="userView">
+          <li *ngIf="user"><div class="userView">
             <div class="background black"></div>
             <a><img class="circle" src="{{userObjFromDb?.photoURL}}"></a>
             <a><span class="white-text name">{{userObjFromDb?.name}}</span></a>
             <a><span class="white-text email">{{userObjFromDb?.email}}</span></a>
             <a (click)="logoutComponent()"><span class="white-text email">Log Out</span></a>
           </div></li>
-          <div class="team-nav-bar-section">
+          <div *ngIf="user" class="team-nav-bar-section">
             <li><div class="divider"></div></li>
             <li><a class="subheader"><h5 class="grey-text"><strong>My Teams</strong></h5></a></li>
             <li><a *ngIf="user" routerLink='/teams/new' class="waves-effect waves-light btn">Create a new team</a></li>
             <li *ngFor="let team of teams"><a routerLink="/teams/{{team.$key}}" class="white-text">{{team.name}}</a></li>
+          </div>
+          <div *ngIf="!user">
+            <a (click)="loginGoogleComponent()">Log in with Google</a>
           </div>
         </ul>
       </div>
