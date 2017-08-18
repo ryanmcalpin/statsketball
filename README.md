@@ -2,6 +2,8 @@
 Ryan McAlpin, Janek Brandt, Mark Fisher
 Epicodus, May 15-18, 2017
 
+##### Live Version: https://statsketball-27ff5.firebaseapp.com/
+
 ## Description
 A webapp made using the Angular2 javaScript framework that allows users (e.g., a coach of a high school basketball team) to log in via their google accounts and then create teams, players, and games, and track their statistics. Statsketball also allows users (when not logged in) to view other users' teams and statistics, but not edit them.
 
