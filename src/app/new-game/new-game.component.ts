@@ -41,4 +41,8 @@ export class NewGameComponent implements OnInit {
     this.db.addGameToPlayers(this.team, gameId);
     this.router.navigate(['teams', this.team.$key, 'games', gameId, 'stats']);
   }
+
+  closeModal() {
+    this.closeModalSender.emit();
+  }
 }

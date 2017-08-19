@@ -1,0 +1,14 @@
+.button-container {
+  margin-bottom: 0;
+}
+
+.close-button {
+  float: right;
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+  .button-container button {
+    width: 50%;
+  }
+}
